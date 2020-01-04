@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+
+    <color name="rateTitleText">#757575</color>
+    <color name="rateNeverButtonText">#A6A6A6</color>
+
+    <color name="feedbackTitleText">#757575</color>
+    <color name="feedbackCancelButtonText">#757575</color>
+
+</resources>

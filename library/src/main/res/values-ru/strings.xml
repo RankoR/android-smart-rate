@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sr_title">Как вам наше приложение?</string>
+    <string name="sr_never_ask">Не спрашивать</string>
+    <string name="sr_maybe_later">Позже</string>
+    <string name="sr_title_feedback">Отзыв</string>
+    <string name="sr_hint_feedback">Напишите, что мы можем улучшить</string>
+    <string name="sr_feedback_cancel">Отмена</string>
+    <string name="sr_feedback_submit">Отправить</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sr_title">How was your experience with us?</string>
+    <string name="sr_never_ask">Never</string>
+    <string name="sr_maybe_later">Maybe later</string>
+    <string name="sr_title_feedback">Feedback</string>
+    <string name="sr_hint_feedback">Suggest us what went wrong and we\'ll work on it</string>
+    <string name="sr_feedback_cancel">Cancel</string>
+    <string name="sr_feedback_submit">Submit</string>
+</resources>

@@ -1,0 +1,51 @@
+package com.g2pdev.smartrate.ui.rate
+
+import android.graphics.drawable.Drawable
+import com.g2pdev.smartrate.SmartRate
+import com.g2pdev.smartrate.extension.schedulersIoToMain
+import com.g2pdev.smartrate.interactor.GetAppIcon
+import com.g2pdev.smartrate.ui.base.BasePresenter
+import moxy.InjectViewState
+import timber.log.Timber
+import javax.inject.Inject
+
+@InjectViewState
+internal class RatePresenter : BasePresenter<RateView>() {
+
+    @Inject
+    lateinit var getAppIcon: GetAppIcon
+
+    init {
+        SmartRate.plusRateComponent().inject(this)
+    }
+
+    fun loadAppIcon(overrideIcon: Drawable?, fallbackIcon: Drawable?) {
+        overrideIcon
+            ?.let(viewState::showAppIcon)
+            ?: run {
+                getAppIcon
+                    .exec()
+                    .schedulersIoToMain()
+                    .subscribe(viewState::showAppIcon) {
+                        Timber.e(it)
+
+                        fallbackIcon?.let(viewState::showAppIcon)
+                    }
+                    .disposeOnDestroy()
+
+            }
+    }
+
+    fun onRated(rating: Float) {
+        viewState.close()
+    }
+
+    fun onNeverClick() {
+        viewState.close()
+    }
+
+    fun onLaterClick() {
+        viewState.close()
+    }
+
+}
