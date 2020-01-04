@@ -52,6 +52,10 @@ object SmartRate {
         return rateComponent
     }
 
+    fun clearAll(callback: (() -> Unit)? = null) {
+        rateDisplayer.clearAll(callback)
+    }
+
     fun show(activity: FragmentActivity, config: SmartRateConfig = SmartRateConfig()) {
         rateDisplayer.show(activity, config)
     }

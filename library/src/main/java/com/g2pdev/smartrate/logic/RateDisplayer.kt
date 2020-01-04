@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.extension.schedulersIoToMain
 import com.g2pdev.smartrate.extension.schedulersSingleToMain
+import com.g2pdev.smartrate.interactor.ClearAll
 import com.g2pdev.smartrate.interactor.GetPackageName
 import com.g2pdev.smartrate.interactor.ShouldShowRating
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
@@ -49,6 +50,9 @@ internal class RateDisplayer {
     @Inject
     lateinit var getPackageName: GetPackageName
 
+    @Inject
+    lateinit var clearAll: ClearAll
+
     init {
         SmartRate.plusRateComponent().inject(this)
 
@@ -61,7 +65,7 @@ internal class RateDisplayer {
             // Crash if package name is not Demo
             getPackageName
                 .exec()
-                .map { it == demoAppPackageName }
+                .map { it != demoAppPackageName }
                 .schedulersIoToMain()
                 .subscribe({ shouldCrash ->
                     if (shouldCrash) {
@@ -74,6 +78,16 @@ internal class RateDisplayer {
             .exec()
             .schedulersSingleToMain()
             .subscribe({}, Timber::e)
+    }
+
+    @SuppressLint("CheckResult")
+    fun clearAll(callback: (() -> Unit)? = null) {
+        clearAll
+            .exec()
+            .schedulersSingleToMain()
+            .subscribe({
+                callback?.invoke()
+            }, Timber::e)
     }
 
     @SuppressLint("CheckResult")

@@ -12,7 +12,12 @@ internal abstract class BaseCache<T>(
     private val name: String
 ) {
 
-    private val sharedPreferences by lazy { context.getSharedPreferences(name, Context.MODE_PRIVATE) }
+    private val sharedPreferences by lazy {
+        context.getSharedPreferences(
+            name,
+            Context.MODE_PRIVATE
+        )
+    }
 
     protected abstract fun getType(): Class<T>
 
@@ -50,10 +55,21 @@ internal abstract class BaseCache<T>(
         }
     }
 
+    fun resetSync() {
+        sharedPreferences.edit { putString(name, null) }
+    }
+
+    fun reset(): Completable {
+        return Completable.fromCallable {
+            resetSync()
+        }
+    }
+
+
     class NoValueException : Exception()
 
     private companion object {
-        private const val defaultStringValue = ""
+        private val defaultStringValue = null
     }
 
 }

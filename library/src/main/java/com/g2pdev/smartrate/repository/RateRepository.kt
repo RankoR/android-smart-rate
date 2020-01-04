@@ -19,6 +19,8 @@ internal interface RateRepository {
 
     fun getLastPromptSession(): Single<Int>
     fun setLastPromptSession(session: Int): Completable
+
+    fun clearAll(): Completable
 }
 
 internal class RateRepositoryImpl(
@@ -59,6 +61,15 @@ internal class RateRepositoryImpl(
 
     override fun setLastPromptSession(session: Int): Completable {
         return lastPromptSessionCache.put(session)
+    }
+
+    override fun clearAll(): Completable {
+        return Completable.fromCallable {
+            sessionCountCache.resetSync()
+            isRatedCache.resetSync()
+            neverAskCache.resetSync()
+            lastPromptSessionCache.resetSync()
+        }
     }
 
     private companion object {
