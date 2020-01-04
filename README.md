@@ -1,6 +1,6 @@
 # Smart Rate
 
-![](https://travis-ci.com/RankoR/android-smart-rate.svg?branch=master)
+[![Build Status](https://travis-ci.com/RankoR/android-smart-rate.svg?branch=master)](https://travis-ci.com/RankoR/android-smart-rate)
 
 [Smart rate](https://github.com/RankoR/android-smart-rate) is a library that helps you improve your app's rating and get user feedback, inspired by [Smart App Rate](https://github.com/codemybrainsout/smart-app-rate) library.
 
