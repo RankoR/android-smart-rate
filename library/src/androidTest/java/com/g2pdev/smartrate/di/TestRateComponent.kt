@@ -16,11 +16,13 @@ internal interface TestRateComponent {
 
     fun inject(cachesTest: CachesTest)
     fun inject(rateRepositoryTest: RateRepositoryTest)
+
     fun inject(isRatedInteractorTest: IsRatedInteractorTest)
     fun inject(lastPromptInteractorTest: LastPromptInteractorTest)
     fun inject(neverAskInteractorTest: NeverAskInteractorTest)
     fun inject(sessionCountInteractorTest: SessionCountInteractorTest)
     fun inject(getStoreLinkInteractorTest: GetStoreLinkInteractorTest)
     fun inject(getPackageNameInteractorTest: GetPackageNameInteractorTest)
+    fun inject(shouldShowRatingInteractorTest: ShouldShowRatingInteractorTest)
 
 }
