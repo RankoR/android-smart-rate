@@ -23,7 +23,8 @@ internal class CachesTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent().inject(this)
+        createDaggerComponent()
+            .inject(this)
     }
 
     @Test
