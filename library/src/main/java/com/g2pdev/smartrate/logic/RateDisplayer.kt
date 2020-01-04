@@ -70,9 +70,9 @@ internal class RateDisplayer {
             .subscribe({ shouldShow ->
                 Timber.d("Should show rate dialog: $shouldShow")
 
-//                if (shouldShow) {
+                if (shouldShow) {
                     showRateDialog(activity, config)
-//                }
+                }
             }, Timber::e)
     }
 

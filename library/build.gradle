@@ -16,8 +16,9 @@ android {
         versionName app_version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
 
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -34,6 +35,10 @@ android {
 
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
 }
@@ -64,6 +69,7 @@ dependencies {
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -74,6 +80,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestUtil 'androidx.test:orchestrator:1.2.0'
 
 }
 

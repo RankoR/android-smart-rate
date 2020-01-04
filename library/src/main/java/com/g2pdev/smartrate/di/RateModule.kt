@@ -35,7 +35,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-internal class RateModule(
+internal open class RateModule(
     private val context: Context
 ) {
 
