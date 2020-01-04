@@ -5,7 +5,7 @@ import io.reactivex.disposables.Disposable
 import moxy.MvpPresenter
 import moxy.MvpView
 
-abstract class BasePresenter<T> : MvpPresenter<T>() where T : MvpView {
+internal abstract class BasePresenter<T> : MvpPresenter<T>() where T : MvpView {
 
     private val compositeDisposable by lazy { CompositeDisposable() }
 

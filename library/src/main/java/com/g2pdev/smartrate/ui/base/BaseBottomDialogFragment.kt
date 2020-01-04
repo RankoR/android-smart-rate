@@ -13,7 +13,7 @@ import moxy.MvpBottomSheetDialogFragment
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-abstract class BaseBottomDialogFragment : MvpBottomSheetDialogFragment() {
+internal abstract class BaseBottomDialogFragment : MvpBottomSheetDialogFragment() {
 
     private val compositeDisposable by lazy { CompositeDisposable() }
 
