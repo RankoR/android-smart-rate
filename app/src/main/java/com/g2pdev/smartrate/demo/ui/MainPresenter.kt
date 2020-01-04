@@ -57,6 +57,8 @@ class MainPresenter : BasePresenter<MainView>() {
 
     private fun initConfigListeners() {
         smartRateConfig.apply {
+            onRateDialogShowListener = viewState::showRateDialogShown
+
             onRateListener = viewState::showRated
 
             onNeverAskClickListener = viewState::showNeverClicked

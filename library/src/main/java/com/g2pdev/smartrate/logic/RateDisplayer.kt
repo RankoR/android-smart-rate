@@ -151,6 +151,8 @@ internal class RateDisplayer {
             .show(activityWeakReference.get())
             .also {
                 setLastPromptSessionToCurrent()
+
+                config.onRateDialogShowListener?.invoke()
             }
     }
 
