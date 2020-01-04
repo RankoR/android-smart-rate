@@ -24,3 +24,12 @@ before_script:
 
 script:
   - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - "./gradlew clean build"
+
+deploy:
+  provider: script
+  script: "./gradlew :clean :library:assembleRelease :library:bintrayUpload"
+  skip_cleanup: true
+  dry-run: false
+  on:
+    branch: master
