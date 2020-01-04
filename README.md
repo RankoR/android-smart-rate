@@ -1,5 +1,7 @@
 # Smart Rate
 
+![](https://travis-ci.com/RankoR/android-smart-rate.svg?branch=master)
+
 [Smart rate](https://github.com/RankoR/android-smart-rate) is a library that helps you improve your app's rating and get user feedback, inspired by [Smart App Rate](https://github.com/codemybrainsout/smart-app-rate) library.
 
 
@@ -21,6 +23,11 @@
 - Prompts for rating later after given amount of sessions (if user clicked «Later»)
 - Customizable texts (all!). Two default translations provided — English and Russian.
 - Customizable text and buttons colors
+
+## Limitations
+
+- Minimum SDK version is 21
+- App must use [Material Components](https://material.io/develop/android/docs/getting-started/) theme
 
 ## Installation
 
