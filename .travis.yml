@@ -5,20 +5,45 @@ branches:
   only:
     - master
 
-android:
-  components:
-    - tools
-    - platform-tools
+#android:
+#  components:
+#    - tools
+#    - platform-tools
 
-    - build-tools-29.0.2
-    - android-21
-    - android-29
+#    - build-tools-29.0.2
+#    - android-21
+#    - android-29
+#
+#    - extra-google-m2repository
+#    - extra-android-m2repository
+#
+#     - sys-img-x86-android-29
+#    - sys-img-armeabi-v7a-android-21
 
-    - extra-google-m2repository
-    - extra-android-m2repository
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
-    # - sys-img-x86-android-29
-    - sys-img-armeabi-v7a-android-21
+cache:
+  directories:
+    - $HOME/android-sdk-dl
+    - $HOME/android-sdk
+
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+    - $HOME/.android/build-cache
+
+env:
+  - ANDROID_HOME=$HOME/android-sdk
+
+install:
+  - if test ! -e $HOME/android-sdk-dl/sdk-tools.zip ; then curl https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip > $HOME/android-sdk-dl/sdk-tools.zip ; fi
+  - unzip -qq -n $HOME/android-sdk-dl/sdk-tools.zip -d $HOME/android-sdk
+
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools' > /dev/null
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;29.0.2' > /dev/null
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-29' > /dev/null
 
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a -c 100M
