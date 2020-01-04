@@ -17,7 +17,7 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
 
-    - sys-img-x86-android-29
+    # - sys-img-x86-android-29
     - sys-img-armeabi-v7a-android-21
 
 before_script:
