@@ -1,5 +1,6 @@
-language: android
+language: java
 dist: trusty
+jdk: oraclejdk8
 
 branches:
   only:
