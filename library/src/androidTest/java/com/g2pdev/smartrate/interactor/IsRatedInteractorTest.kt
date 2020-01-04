@@ -1,6 +1,7 @@
-package com.g2pdev.smartrate
+package com.g2pdev.smartrate.interactor
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.interactor.is_rated.IsRated
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
 import org.junit.Before
