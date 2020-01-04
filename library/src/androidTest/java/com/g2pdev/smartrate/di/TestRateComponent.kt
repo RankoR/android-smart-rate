@@ -5,6 +5,7 @@ import com.g2pdev.smartrate.RateRepositoryTest
 import com.g2pdev.smartrate.interactor.IsRatedInteractorTest
 import com.g2pdev.smartrate.interactor.LastPromptInteractorTest
 import com.g2pdev.smartrate.interactor.NeverAskInteractorTest
+import com.g2pdev.smartrate.interactor.SessionCountInteractorTest
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,5 +22,6 @@ internal interface TestRateComponent {
     fun inject(isRatedInteractorTest: IsRatedInteractorTest)
     fun inject(lastPromptInteractorTest: LastPromptInteractorTest)
     fun inject(neverAskInteractorTest: NeverAskInteractorTest)
+    fun inject(sessionCountInteractorTest: SessionCountInteractorTest)
 
 }
