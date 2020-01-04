@@ -13,7 +13,7 @@ buildscript {
         target_sdk_version = 29
 
         app_version_code = 1
-        app_version_name = '1.0'
+        app_version_name = '1.0.0-alpha01'
     }
 
     repositories {
@@ -24,6 +24,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0-alpha07"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
 
