@@ -1,3 +1,20 @@
-<resources>
-    <string name="app_name">SmartRate</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="MissingTranslation">SmartRate</string>
+
+    <string name="hint_session_count" tools:ignore="MissingTranslation">Session count</string>
+    <string name="hint_session_count_between_prompts" tools:ignore="MissingTranslation">Session count between prompts</string>
+
+    <string name="format_fake_session_count" tools:ignore="MissingTranslation">Current session count: %1$d</string>
+    <string name="title_btn_increment_fake_session_count" tools:ignore="MissingTranslation">Increment session count</string>
+    <string name="title_btn_show_dialog" tools:ignore="MissingTranslation">Show dialog</string>
+    <string name="description_show_dialog" tools:ignore="MissingTranslation">Note: Dialog will be shown only if config conditions match</string>
+    <string name="title_btn_reset_library_counters" tools:ignore="MissingTranslation">Reset library counters</string>
+
+    <string name="title_library_counters_cleared" tools:ignore="MissingTranslation">Library counters cleared</string>
+
+    <string name="format_rated" tools:ignore="MissingTranslation">Rated: %1$.1f/5</string>
+    <string name="title_never_clicked" tools:ignore="MissingTranslation">«Never» clicked</string>
+    <string name="title_later_clicked" tools:ignore="MissingTranslation">«Later» clicked</string>
+    <string name="title_feedback_cancel_clicked" tools:ignore="MissingTranslation">Feedback «cancel» clicked</string>
+    <string name="format_feedback_submit_clicked" tools:ignore="MissingTranslation">Feedback: %1$s</string>
 </resources>
