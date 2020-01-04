@@ -1,6 +1,10 @@
 language: android
 dist: trusty
 
+branches:
+  only:
+    - master
+
 android:
   components:
     - tools
