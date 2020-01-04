@@ -55,7 +55,7 @@ internal class RateDisplayer {
     }
 
     @SuppressLint("CheckResult")
-    private fun incrementSessionCount() {
+    fun incrementSessionCount() {
         incrementSessionCount
             .exec()
             .schedulersSingleToMain()

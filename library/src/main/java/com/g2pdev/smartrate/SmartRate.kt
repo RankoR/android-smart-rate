@@ -56,4 +56,11 @@ object SmartRate {
         rateDisplayer.show(activity, config)
     }
 
+    /**
+     * WARNING: This method is ONLY for testing!
+     */
+    fun testIncrementSessionCount() {
+        rateDisplayer.incrementSessionCount()
+    }
+
 }
