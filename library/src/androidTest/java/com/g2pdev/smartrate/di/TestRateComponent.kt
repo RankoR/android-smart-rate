@@ -21,5 +21,6 @@ internal interface TestRateComponent {
     fun inject(neverAskInteractorTest: NeverAskInteractorTest)
     fun inject(sessionCountInteractorTest: SessionCountInteractorTest)
     fun inject(getStoreLinkInteractorTest: GetStoreLinkInteractorTest)
+    fun inject(getPackageNameInteractorTest: GetPackageNameInteractorTest)
 
 }
