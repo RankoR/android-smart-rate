@@ -40,8 +40,8 @@ bintray {
         vcsUrl = 'git@github.com:RankoR/android-smart-rate.git'
 
         version {
-            name = app_version_name
-            vcsTag = app_version_name
+            name = smart_rate_version
+            vcsTag = smart_rate_version
         }
     }
     publications = ['Production']

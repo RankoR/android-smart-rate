@@ -13,7 +13,7 @@ android {
         targetSdkVersion target_sdk_version
 
         versionCode 1
-        versionName "1.0.0-alpha04"
+        versionName smart_rate_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
