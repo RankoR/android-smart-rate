@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.FragmentActivity
 import com.g2pdev.smartrate.SmartRate
+import com.g2pdev.smartrate.extension.schedulersIoToMain
 import com.g2pdev.smartrate.extension.schedulersSingleToMain
 import com.g2pdev.smartrate.interactor.GetPackageName
 import com.g2pdev.smartrate.interactor.ShouldShowRating
@@ -55,7 +56,20 @@ internal class RateDisplayer {
     }
 
     @SuppressLint("CheckResult")
-    fun incrementSessionCount() {
+    fun incrementSessionCount(test: Boolean = false) {
+        if (test) {
+            // Crash if package name is not Demo
+            getPackageName
+                .exec()
+                .map { it == demoAppPackageName }
+                .schedulersIoToMain()
+                .subscribe({ shouldCrash ->
+                    if (shouldCrash) {
+                        throw IllegalAccessError("Do not call test methods in real apps!")
+                    }
+                }, Timber::e)
+        }
+
         incrementSessionCount
             .exec()
             .schedulersSingleToMain()
@@ -216,6 +230,10 @@ internal class RateDisplayer {
 
     private fun Context.canLaunch(intent: Intent): Boolean {
         return intent.resolveActivity(packageManager) != null
+    }
+
+    private companion object {
+        private const val demoAppPackageName = "com.g2pdev.smartrate.demo"
     }
 
 }

@@ -60,7 +60,7 @@ object SmartRate {
      * WARNING: This method is ONLY for testing!
      */
     fun testIncrementSessionCount() {
-        rateDisplayer.incrementSessionCount()
+        rateDisplayer.incrementSessionCount(test = true)
     }
 
 }
