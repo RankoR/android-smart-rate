@@ -197,6 +197,8 @@ Please, report any issues [here](https://github.com/RankoR/android-smart-rate/is
 
 This library is inspired by [Smart App Rate](https://github.com/codemybrainsout/smart-app-rate).
 
+Fallback rate icon made by [Freepik](https://www.flaticon.com/authors/freepik).
+
 Author: [Artem Smirnov](https://github.com/RankoR).
 
 ## License
