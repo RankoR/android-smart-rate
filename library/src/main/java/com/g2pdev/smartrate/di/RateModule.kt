@@ -176,4 +176,10 @@ internal open class RateModule(
         getPackageName: GetPackageName
     ): GetAppIcon = GetAppIconImpl(packageManager, getPackageName)
 
+    @Provides
+    @Singleton
+    fun provideClearAll(
+        rateRepository: RateRepository
+    ): ClearAll = ClearAllImpl(rateRepository)
+
 }

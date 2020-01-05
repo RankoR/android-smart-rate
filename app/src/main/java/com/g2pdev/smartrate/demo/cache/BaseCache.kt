@@ -1,4 +1,4 @@
-package com.g2pdev.smartrate.cache
+package com.g2pdev.smartrate.demo.cache
 
 import android.content.Context
 import androidx.core.content.edit
@@ -6,18 +6,13 @@ import com.google.gson.Gson
 import io.reactivex.Completable
 import io.reactivex.Single
 
-internal abstract class BaseCache<T>(
+abstract class BaseCache<T>(
     private val gson: Gson,
     context: Context,
     private val name: String
 ) {
 
-    private val sharedPreferences by lazy {
-        context.getSharedPreferences(
-            name,
-            Context.MODE_PRIVATE
-        )
-    }
+    private val sharedPreferences by lazy { context.getSharedPreferences(name, Context.MODE_PRIVATE) }
 
     protected abstract fun getType(): Class<T>
 
@@ -55,21 +50,10 @@ internal abstract class BaseCache<T>(
         }
     }
 
-    fun resetSync() {
-        sharedPreferences.edit { putString(name, null) }
-    }
-
-    fun reset(): Completable {
-        return Completable.fromCallable {
-            resetSync()
-        }
-    }
-
-
     class NoValueException : Exception()
 
     private companion object {
-        private val defaultStringValue = null
+        private const val defaultStringValue = ""
     }
 
 }

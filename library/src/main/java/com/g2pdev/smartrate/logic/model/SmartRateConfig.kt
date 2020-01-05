@@ -63,6 +63,8 @@ data class SmartRateConfig(
 
     var customStoreLink: String? = null,
 
+    var onRateDialogShowListener: (() -> Unit)? = null,
+
     var onRateDismissListener: (() -> Unit)? = null,
 
     var onRateListener: ((rating: Float) -> Unit)? = null,

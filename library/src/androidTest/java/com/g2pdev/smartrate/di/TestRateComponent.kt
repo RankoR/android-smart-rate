@@ -24,5 +24,6 @@ internal interface TestRateComponent {
     fun inject(getStoreLinkInteractorTest: GetStoreLinkInteractorTest)
     fun inject(getPackageNameInteractorTest: GetPackageNameInteractorTest)
     fun inject(shouldShowRatingInteractorTest: ShouldShowRatingInteractorTest)
+    fun inject(clearAllInteractorTest: ClearAllInteractorTest)
 
 }
