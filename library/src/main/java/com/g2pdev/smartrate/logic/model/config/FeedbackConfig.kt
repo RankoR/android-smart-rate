@@ -28,7 +28,9 @@ internal data class FeedbackConfig(
     @ColorRes
     var submitButtonTextColorResId: Int?,
 
-    val isDismissible: Boolean
+    val isDismissible: Boolean,
+
+    val minFeedbackLength: Int
 ) : Parcelable {
 
     fun SmartRateConfig.getFeedbackConfig(): FeedbackConfig {
@@ -40,7 +42,8 @@ internal data class FeedbackConfig(
             titleTextColorResId = feedbackTitleTextColorResId,
             cancelButtonTextColorResId = feedbackCancelButtonTextColorResId,
             submitButtonTextColorResId = feedbackSubmitButtonTextColorResId,
-            isDismissible = isFeedbackDismissible
+            isDismissible = isFeedbackDismissible,
+            minFeedbackLength = minFeedbackLength
         )
     }
 

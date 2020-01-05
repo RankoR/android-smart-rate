@@ -4,7 +4,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.g2pdev.smartrate.R
-import com.g2pdev.smartrate.logic.model.RateConfig
 import com.g2pdev.smartrate.logic.model.Store
 
 data class SmartRateConfig(
@@ -77,6 +76,8 @@ data class SmartRateConfig(
 
     var isFeedbackDismissible: Boolean = false,
 
+    var minFeedbackLength: Int = defaultMinFeedbackLength,
+
     var onFeedbackDismissListener: (() -> Unit)? = null,
 
     var onFeedbackCancelClickListener: (() -> Unit)? = null,
@@ -88,6 +89,7 @@ data class SmartRateConfig(
         const val defaultMinSessionCount = 3
         const val defaultMinSessionCountBetweenPrompts = 3
         const val defaultMinRatingForStore = 4f
+        const val defaultMinFeedbackLength = 6
     }
 
 }
