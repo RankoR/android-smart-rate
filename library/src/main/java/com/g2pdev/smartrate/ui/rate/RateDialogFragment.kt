@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import com.g2pdev.smartrate.R
 import com.g2pdev.smartrate.extension.getColorCompat
 import com.g2pdev.smartrate.extension.getDrawableCompat
-import com.g2pdev.smartrate.logic.model.RateConfig
+import com.g2pdev.smartrate.logic.model.config.RateConfig
 import com.g2pdev.smartrate.ui.base.BaseBottomDialogFragment
 import kotlinx.android.synthetic.main.fragment_dialog_rate.*
 import moxy.presenter.InjectPresenter

@@ -2,33 +2,32 @@ package com.g2pdev.smartrate.logic.model.config
 
 import android.os.Parcelable
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-internal data class FeedbackConfig(
+internal data class RateConfig(
+    @DrawableRes
+    val iconDrawableResId: Int?,
+
     @StringRes
     val titleResId: Int,
 
     @StringRes
-    val hintResId: Int,
+    val neverAskResId: Int,
 
     @StringRes
-    val cancelResId: Int,
-
-    @StringRes
-    val submitResId: Int,
+    val laterResId: Int,
 
     @ColorRes
     var titleTextColorResId: Int,
 
     @ColorRes
-    var cancelButtonTextColorResId: Int,
+    var neverAskButtonTextColorResId: Int,
 
     @ColorRes
-    var submitButtonTextColorResId: Int?,
+    var laterButtonTextColorResId: Int?,
 
-    val isDismissible: Boolean,
-
-    val minFeedbackLength: Int
+    val isDismissible: Boolean
 ) : Parcelable
