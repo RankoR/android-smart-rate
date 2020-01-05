@@ -22,7 +22,6 @@ internal fun SmartRateConfig.getFeedbackConfig(): FeedbackConfig {
         titleTextColorResId = feedbackTitleTextColorResId,
         cancelButtonTextColorResId = feedbackCancelButtonTextColorResId,
         submitButtonTextColorResId = feedbackSubmitButtonTextColorResId,
-        isDismissible = isFeedbackDismissible,
-        minFeedbackLength = minFeedbackLength
+        isDismissible = isFeedbackDismissible
     )
 }

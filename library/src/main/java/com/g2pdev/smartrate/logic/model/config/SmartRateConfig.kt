@@ -4,7 +4,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.g2pdev.smartrate.R
-import com.g2pdev.smartrate.logic.model.RateConfig
 import com.g2pdev.smartrate.logic.model.Store
 
 data class SmartRateConfig(
