@@ -4,8 +4,13 @@
 
 [Smart rate](https://github.com/RankoR/android-smart-rate) is a library that helps you improve your app's rating and get user feedback, inspired by [Smart App Rate](https://github.com/codemybrainsout/smart-app-rate) library.
 
-
 ![](screenshots/screenshot.png)
+
+## Demo
+
+See demo app on Google Play
+
+![https://play.google.com/store/apps/details?id=com.g2pdev.smartrate.demo](screenshots/gp.svg)
 
 ## Features
 
