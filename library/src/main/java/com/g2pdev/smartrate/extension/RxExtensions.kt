@@ -1,11 +1,16 @@
 package com.g2pdev.smartrate.extension
 
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 internal fun <T> Single<T>.schedulersIoToMain(): Single<T> {
+    return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+}
+
+internal fun <T> Observable<T>.schedulersIoToMain(): Observable<T> {
     return subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 }
 
