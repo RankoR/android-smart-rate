@@ -13,27 +13,20 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-@LargeTest
-class ExampleInstrumentedTest {
-
-    @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
-        MainActivity::class.java
-    )
-
-    private fun checkIfDialogDisplayed() {
-        onView(withId(R.id.ratingBar)).check(matches(isDisplayed()))
-    }
-
-    private fun checkIfDialogNotDisplayed() {
-        onView(withId(R.id.ratingBar)).check(doesNotExist())
-    }
-
-    @Test
-    fun test() {
-        checkIfDialogNotDisplayed()
-
-        checkIfDialogDisplayed()
-    }
-}
+//@RunWith(AndroidJUnit4::class)
+//@LargeTest
+//class ExampleInstrumentedTest {
+//
+//    @get:Rule
+//    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
+//        MainActivity::class.java
+//    )
+//
+//    private fun checkIfDialogDisplayed() {
+//        onView(withId(R.id.ratingBar)).check(matches(isDisplayed()))
+//    }
+//
+//    private fun checkIfDialogNotDisplayed() {
+//        onView(withId(R.id.ratingBar)).check(doesNotExist())
+//    }
+//}
