@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.demo.R
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -22,7 +22,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val compositeDisposable = CompositeDisposable()
 
-    private var smartRateConfig = SmartRateConfig()
+    private var smartRateConfig =
+        SmartRateConfig()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

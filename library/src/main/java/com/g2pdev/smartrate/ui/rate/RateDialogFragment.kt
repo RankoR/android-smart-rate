@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import com.g2pdev.smartrate.R
 import com.g2pdev.smartrate.extension.getColorCompat
 import com.g2pdev.smartrate.extension.getDrawableCompat
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.RateConfig
 import com.g2pdev.smartrate.ui.base.BaseBottomDialogFragment
 import kotlinx.android.synthetic.main.fragment_dialog_rate.*
 import moxy.presenter.InjectPresenter
@@ -37,7 +37,7 @@ internal class RateDialogFragment : BaseBottomDialogFragment(), RateView {
         super.onViewCreated(view, savedInstanceState)
 
         arguments
-            ?.getParcelable<SmartRateConfig.RateConfig>(argConfig)
+            ?.getParcelable<RateConfig>(argConfig)
             ?.let { config ->
 
                 val fallbackIconDrawable = context?.getDrawableCompat(R.drawable.star)
@@ -99,7 +99,7 @@ internal class RateDialogFragment : BaseBottomDialogFragment(), RateView {
 
         private const val argConfig = "config"
 
-        fun newInstance(config: SmartRateConfig.RateConfig): RateDialogFragment {
+        fun newInstance(config: RateConfig): RateDialogFragment {
             return RateDialogFragment()
                 .apply {
                     arguments = bundleOf(argConfig to config)

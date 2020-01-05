@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.g2pdev.smartrate.R
 import com.g2pdev.smartrate.extension.getColorCompat
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.FeedbackConfig
 import com.g2pdev.smartrate.ui.base.BaseBottomDialogFragment
 import kotlinx.android.synthetic.main.fragment_dialog_feedback.*
 
@@ -27,7 +27,7 @@ internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments
-            ?.getParcelable<SmartRateConfig.FeedbackConfig>(argConfig)
+            ?.getParcelable<FeedbackConfig>(argConfig)
             ?.let { config ->
                 titleTv.setText(config.titleResId)
                 feedbackTil.hint = getString(config.hintResId)
@@ -83,7 +83,7 @@ internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
         private const val argConfig = "config"
         private const val argText = "text"
 
-        fun newInstance(config: SmartRateConfig.FeedbackConfig): FeedbackDialogFragment {
+        fun newInstance(config: FeedbackConfig): FeedbackDialogFragment {
             return FeedbackDialogFragment()
                 .apply {
                     arguments = bundleOf(argConfig to config)

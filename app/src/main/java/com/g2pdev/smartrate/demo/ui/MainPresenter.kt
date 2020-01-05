@@ -10,7 +10,7 @@ import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSess
 import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPrompts
 import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPrompts
 import com.g2pdev.smartrate.demo.util.schedulersSingleToMain
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import moxy.InjectViewState
 import timber.log.Timber
 import javax.inject.Inject
@@ -39,7 +39,8 @@ class MainPresenter : BasePresenter<MainView>() {
     @Inject
     internal lateinit var clearFakeSessionCount: ClearFakeSessionCount
 
-    private val smartRateConfig = SmartRateConfig()
+    private val smartRateConfig =
+        SmartRateConfig()
 
     init {
         DiHolder.plusAppComponent().inject(this)

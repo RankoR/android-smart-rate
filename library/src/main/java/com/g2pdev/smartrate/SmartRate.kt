@@ -7,7 +7,7 @@ import com.g2pdev.smartrate.di.DaggerRateComponent
 import com.g2pdev.smartrate.di.RateComponent
 import com.g2pdev.smartrate.di.RateModule
 import com.g2pdev.smartrate.logic.RateDisplayer
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import timber.log.Timber
 
 
