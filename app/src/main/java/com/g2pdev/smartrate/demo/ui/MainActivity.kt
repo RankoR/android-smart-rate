@@ -97,6 +97,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         Toast.makeText(this, R.string.title_rate_dialog_shown, Toast.LENGTH_LONG).show()
     }
 
+    override fun showRateDialogWillNotShow() {
+        Toast.makeText(this, R.string.title_rate_dialog_will_not_show, Toast.LENGTH_LONG).show()
+    }
+
     override fun showRated(stars: Float) {
         Toast.makeText(this, getString(R.string.format_rated, stars), Toast.LENGTH_LONG).show()
     }
