@@ -19,11 +19,12 @@ import com.g2pdev.smartrate.demo.util.waitUntilDoesNotExist
 import com.g2pdev.smartrate.demo.util.waitUntilVisible
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.not
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import java.util.regex.Pattern
 
 
-abstract class BaseTest {
+abstract class BaseUiTest {
 
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
@@ -42,6 +43,16 @@ abstract class BaseTest {
         }
 
         throw IllegalStateException("No number found")
+    }
+
+    protected fun setLibrarySessionCount(sessionCount: Int) {
+        assertEquals("Invalid session count", 1, getCurrentSessionCount())
+
+        setSessionCount(sessionCount)
+
+        while (getCurrentSessionCount() < sessionCount) {
+            incrementSessionCount()
+        }
     }
 
     protected fun setSessionCount(sessionCount: Int) {

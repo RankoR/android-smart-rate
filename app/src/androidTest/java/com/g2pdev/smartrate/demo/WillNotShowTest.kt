@@ -2,19 +2,16 @@ package com.g2pdev.smartrate.demo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class WillNotShowTest : BaseTest() {
+class WillNotShowTest : BaseUiTest() {
 
     @Test
     fun testNotEnoughSessions() {
-        assertEquals("Invalid session count", 1, getCurrentSessionCount())
-
-        setSessionCount(10)
+        setLibrarySessionCount(3)
 
         showDialog()
 
@@ -24,15 +21,7 @@ class WillNotShowTest : BaseTest() {
 
     @Test
     fun testNeverClicked() {
-        assertEquals("Invalid session count", 1, getCurrentSessionCount())
-
-        val desiredSessionCount = 3
-
-        setSessionCount(desiredSessionCount)
-
-        while (getCurrentSessionCount() < desiredSessionCount) {
-            incrementSessionCount()
-        }
+        setLibrarySessionCount(3)
 
         showDialog()
         assertRateDialogDisplayed()
@@ -46,16 +35,8 @@ class WillNotShowTest : BaseTest() {
 
     @Test
     fun testMaybeLaterNotEnoughSessions() {
-        assertEquals("Invalid session count", 1, getCurrentSessionCount())
-
-        val desiredSessionCount = 3
-
-        setSessionCount(desiredSessionCount)
+        setLibrarySessionCount(3)
         setSessionCountBetweenPrompts(3)
-
-        while (getCurrentSessionCount() < desiredSessionCount) {
-            incrementSessionCount()
-        }
 
         showDialog()
         assertRateDialogDisplayed()
