@@ -17,6 +17,7 @@ import com.g2pdev.smartrate.demo.matcher.ToastMatcher
 import com.g2pdev.smartrate.demo.ui.MainActivity
 import com.g2pdev.smartrate.demo.util.waitUntilDoesNotExist
 import com.g2pdev.smartrate.demo.util.waitUntilVisible
+import com.g2pdev.smartrate.demo.view_action.SetRatingBarValue
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.not
 import org.junit.Assert.assertEquals
@@ -67,6 +68,14 @@ abstract class BaseUiTest {
         onView(withId(R.id.incrementFakeSessionCountBtn))
             .waitUntilVisible()
             .perform(click())
+    }
+
+    protected fun setRating(rating: Float) {
+        sleep(3_000)
+
+        onView(withId(R.id.ratingBar))
+            .waitUntilVisible()
+            .perform(SetRatingBarValue(rating, true))
     }
 
     protected fun showDialog() {
@@ -121,6 +130,18 @@ abstract class BaseUiTest {
 
     protected fun assertRateDialogNotDisplayed() {
         onView(withId(R.id.ratingBar))
+            .waitUntilDoesNotExist()
+            .check(doesNotExist())
+    }
+
+    protected fun assertFeedbackDialogDisplayed() {
+        onView(withId(R.id.feedbackEt))
+            .waitUntilVisible()
+            .check(matches(isDisplayed()))
+    }
+
+    protected fun assertFeedbackDialogNotDisplayed() {
+        onView(withId(R.id.feedbackEt))
             .waitUntilDoesNotExist()
             .check(doesNotExist())
     }
