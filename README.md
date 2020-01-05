@@ -10,7 +10,7 @@
 
 See demo app on Google Play
 
-[![](screenshots/gp.svg)](https://play.google.com/store/apps/details?id=com.g2pdev.smartrate.demo)
+[![](screenshots/gp.svg | height=100)](https://play.google.com/store/apps/details?id=com.g2pdev.smartrate.demo)
 
 ## Features
 
