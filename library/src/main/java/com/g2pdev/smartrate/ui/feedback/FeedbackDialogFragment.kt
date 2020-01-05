@@ -7,19 +7,29 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.g2pdev.smartrate.R
 import com.g2pdev.smartrate.extension.getColorCompat
+import com.g2pdev.smartrate.extension.schedulersIoToMain
 import com.g2pdev.smartrate.logic.model.config.FeedbackConfig
 import com.g2pdev.smartrate.ui.base.BaseBottomDialogFragment
+import com.jakewharton.rxbinding3.widget.textChanges
 import kotlinx.android.synthetic.main.fragment_dialog_feedback.*
+import moxy.presenter.InjectPresenter
+import timber.log.Timber
 
-internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
+internal class FeedbackDialogFragment : BaseBottomDialogFragment(), FeedbackView {
+
+    @InjectPresenter
+    lateinit var presenter: FeedbackPresenter
 
     var onCancelListener: (() -> Unit)? = null
     var onSubmitListener: ((text: String) -> Unit)? = null
 
-
     override fun getFragmentTag() = fragmentTag
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_dialog_feedback, container, false)
     }
 
@@ -36,7 +46,8 @@ internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
                 submitBtn.setText(config.submitResId)
 
                 context?.getColorCompat(config.titleTextColorResId)?.let(titleTv::setTextColor)
-                context?.getColorCompat(config.cancelButtonTextColorResId)?.let(cancelBtn::setTextColor)
+                context?.getColorCompat(config.cancelButtonTextColorResId)
+                    ?.let(cancelBtn::setTextColor)
                 config.submitButtonTextColorResId?.let {
                     context?.getColorCompat(it)?.let(submitBtn::setTextColor)
                 }
@@ -44,7 +55,21 @@ internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
                 if (!config.isDismissible) {
                     disableDismiss()
                 }
+
+                presenter.setMinFeedbackLength(config.minFeedbackLength)
             } ?: run(::close)
+
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        feedbackEt
+            .textChanges()
+            .map { it.toString() }
+            .map { it.trim() }
+            .schedulersIoToMain()
+            .subscribe(presenter::onFeedbackTextChanged, Timber::e)
+            .disposeOnDestroy()
 
         cancelBtn.setOnClickListener {
             onCancelListener?.invoke()
@@ -73,7 +98,11 @@ internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
         savedInstanceState?.getString(argText)?.let(feedbackEt::setText)
     }
 
-    private fun close() {
+    override fun enableSubmitButton(enable: Boolean) {
+        submitBtn.isEnabled = enable
+    }
+
+    override fun close() {
         onDismissListener = null
         dismiss()
     }
