@@ -28,5 +28,7 @@ internal data class FeedbackConfig(
     @ColorRes
     var submitButtonTextColorResId: Int?,
 
-    val isDismissible: Boolean
+    val isDismissible: Boolean,
+
+    val minFeedbackLength: Int
 ) : Parcelable

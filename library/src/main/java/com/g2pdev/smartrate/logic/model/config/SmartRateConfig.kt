@@ -76,6 +76,8 @@ data class SmartRateConfig(
 
     var isFeedbackDismissible: Boolean = false,
 
+    var minFeedbackLength: Int = defaultMinFeedbackLength,
+
     var onFeedbackDismissListener: (() -> Unit)? = null,
 
     var onFeedbackCancelClickListener: (() -> Unit)? = null,
@@ -87,6 +89,7 @@ data class SmartRateConfig(
         const val defaultMinSessionCount = 3
         const val defaultMinSessionCountBetweenPrompts = 3
         const val defaultMinRatingForStore = 4f
+        const val defaultMinFeedbackLength = 6
     }
 
 }
