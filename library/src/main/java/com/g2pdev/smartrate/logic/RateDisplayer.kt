@@ -16,7 +16,7 @@ import com.g2pdev.smartrate.interactor.last_prompt.SetLastPromptSessionToCurrent
 import com.g2pdev.smartrate.interactor.never_ask.SetNeverAsk
 import com.g2pdev.smartrate.interactor.session_count.IncrementSessionCount
 import com.g2pdev.smartrate.interactor.store.GetStoreLink
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import com.g2pdev.smartrate.logic.model.StoreLink
 import com.g2pdev.smartrate.ui.feedback.FeedbackDialogFragment
 import com.g2pdev.smartrate.ui.rate.RateDialogFragment

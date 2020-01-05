@@ -1,11 +1,11 @@
-package com.g2pdev.smartrate.logic.model
+package com.g2pdev.smartrate.logic.model.config
 
-import android.os.Parcelable
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.g2pdev.smartrate.R
-import kotlinx.android.parcel.Parcelize
+import com.g2pdev.smartrate.logic.model.RateConfig
+import com.g2pdev.smartrate.logic.model.Store
 
 data class SmartRateConfig(
 
@@ -83,88 +83,6 @@ data class SmartRateConfig(
 
     var onFeedbackSubmitClickListener: ((text: String) -> Unit)? = null
 ) {
-
-    // TODO: Refactor?
-    internal fun getRateConfig(): RateConfig {
-        return RateConfig(
-            iconDrawableResId = iconDrawableResId,
-            titleResId = titleResId,
-            neverAskResId = rateNeverAskResId,
-            laterResId = rateLaterResId,
-            titleTextColorResId = rateTitleTextColorResId,
-            neverAskButtonTextColorResId = rateNeverAskButtonTextColorResId,
-            laterButtonTextColorResId = rateLaterButtonTextColorResId,
-            isDismissible = isRateDismissible
-        )
-    }
-
-    // TODO: Refactor?
-    internal fun getFeedbackConfig(): FeedbackConfig {
-        return FeedbackConfig(
-            titleResId = feedbackTitleResId,
-            hintResId = feedbackHintResId,
-            cancelResId = feedbackCancelResId,
-            submitResId = feedbackSubmitResId,
-            titleTextColorResId = feedbackTitleTextColorResId,
-            cancelButtonTextColorResId = feedbackCancelButtonTextColorResId,
-            submitButtonTextColorResId = feedbackSubmitButtonTextColorResId,
-            isDismissible = isFeedbackDismissible
-        )
-    }
-
-    // TODO: Refactor?
-    @Parcelize
-    internal data class RateConfig(
-        @DrawableRes
-        val iconDrawableResId: Int?,
-
-        @StringRes
-        val titleResId: Int,
-
-        @StringRes
-        val neverAskResId: Int,
-
-        @StringRes
-        val laterResId: Int,
-
-        @ColorRes
-        var titleTextColorResId: Int,
-
-        @ColorRes
-        var neverAskButtonTextColorResId: Int,
-
-        @ColorRes
-        var laterButtonTextColorResId: Int?,
-
-        val isDismissible: Boolean
-    ) : Parcelable
-
-    // TODO: Refactor?
-    @Parcelize
-    internal data class FeedbackConfig(
-        @StringRes
-        val titleResId: Int,
-
-        @StringRes
-        val hintResId: Int,
-
-        @StringRes
-        val cancelResId: Int,
-
-        @StringRes
-        val submitResId: Int,
-
-        @ColorRes
-        var titleTextColorResId: Int,
-
-        @ColorRes
-        var cancelButtonTextColorResId: Int,
-
-        @ColorRes
-        var submitButtonTextColorResId: Int?,
-
-        val isDismissible: Boolean
-    ) : Parcelable
 
     companion object {
         const val defaultMinSessionCount = 3

@@ -1,6 +1,6 @@
 package com.g2pdev.smartrate.demo.ui
 
-import com.g2pdev.smartrate.logic.model.SmartRateConfig
+import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
