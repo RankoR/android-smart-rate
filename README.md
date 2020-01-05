@@ -97,7 +97,12 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        SmartRate.show(this)
+        val config = SmartRateConfig()
+                        .apply {
+                            // ...
+                        }
+        
+        SmartRate.show(this, config)
     }
 }
 ```
