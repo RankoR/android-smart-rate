@@ -16,6 +16,7 @@ interface MainView : MvpView {
     fun showCountersCleared()
 
     fun showRateDialogShown()
+    fun showRateDialogWillNotShow()
     fun showRated(stars: Float)
     fun showNeverClicked()
     fun showLaterClicked()

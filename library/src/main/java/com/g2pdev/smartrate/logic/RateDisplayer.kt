@@ -102,6 +102,8 @@ internal class RateDisplayer {
 
                 if (shouldShow) {
                     showRateDialog(activity, config)
+                } else {
+                    config.onRateDialogWillNotShowListener?.invoke()
                 }
             }, Timber::e)
     }

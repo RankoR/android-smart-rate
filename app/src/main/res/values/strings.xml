@@ -13,6 +13,7 @@
     <string name="title_library_counters_cleared" tools:ignore="MissingTranslation">Library counters cleared</string>
 
     <string name="title_rate_dialog_shown" tools:ignore="MissingTranslation">Rated dialog shown</string>
+    <string name="title_rate_dialog_will_not_show" tools:ignore="MissingTranslation">Will not show rate dialog</string>
     <string name="format_rated" tools:ignore="MissingTranslation">Rated: %1$.1f/5</string>
     <string name="title_never_clicked" tools:ignore="MissingTranslation">«Never» clicked</string>
     <string name="title_later_clicked" tools:ignore="MissingTranslation">«Later» clicked</string>

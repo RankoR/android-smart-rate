@@ -111,7 +111,7 @@ See config section [below](#config).
 
 ## Config
 
-Configuration is represented by class [`SmartRateConfig`](/library/src/main/java/com/g2pdev/smartrate/logic/model/SmartRateConfig.kt).
+Configuration is represented by class [`SmartRateConfig`](/library/src/main/java/com/g2pdev/smartrate/logic/model/config/SmartRateConfig.kt).
 
 | Field  | Type | Description | Default value |
 |---|---|---|---|
@@ -143,6 +143,7 @@ Listeners are also located in the config:
 | Field  | Type | Description | Default value |
 |---|---|---|---|
 | `onRateDialogShowListener` | `(() -> Unit)?` | Called when rate dialog is shown | `null` |
+| `onRateDialogWillNotShowListener` | `(() -> Unit)?` | Called when rate dialog will not be shown because of conditions failure | `null` |
 | `onRateDismissListener` | `(() -> Unit)?` | Called when rate dialog is dismissed (by clicking «Back» button or outside) | `null` |
 | `onRateListener` | `((rating: Float) -> Unit)?` | Called when user rated app | `null` |
 | `onNeverAskClickListener` | `(() -> Unit)?` | Called when user clicks «Never ask» button | `null` |
