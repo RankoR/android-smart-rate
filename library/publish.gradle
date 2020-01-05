@@ -7,7 +7,7 @@ publishing {
             artifact("$buildDir/outputs/aar/library-release.aar")
             groupId 'com.g2pdev'
             artifactId 'smartrate'
-            version app_version_name
+            version smart_rate_version
 
             pom.withXml {
                 configurations.compile.allDependencies.each {
