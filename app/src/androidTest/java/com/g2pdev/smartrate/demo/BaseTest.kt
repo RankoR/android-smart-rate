@@ -15,10 +15,13 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.g2pdev.smartrate.demo.matcher.ToastMatcher
 import com.g2pdev.smartrate.demo.ui.MainActivity
+import com.g2pdev.smartrate.demo.util.waitUntilDoesNotExist
+import com.g2pdev.smartrate.demo.util.waitUntilVisible
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.not
 import org.junit.Rule
 import java.util.regex.Pattern
+
 
 abstract class BaseTest {
 
@@ -50,38 +53,69 @@ abstract class BaseTest {
     }
 
     protected fun incrementSessionCount() {
-
+        onView(withId(R.id.incrementFakeSessionCountBtn))
+            .waitUntilVisible()
+            .perform(click())
     }
 
     protected fun showDialog() {
-        onView(withId(R.id.showRateDialogBtn)).perform(click())
+        onView(withId(R.id.showRateDialogBtn))
+            .waitUntilVisible()
+            .perform(click())
     }
 
     protected fun resetLibraryCounters() {
+        onView(withId(R.id.resetLibraryCountersBtn))
+            .waitUntilVisible()
+            .perform(click())
+    }
 
+    protected fun clickRateDialogNever() {
+        sleep(3_000)
+
+        onView(withId(R.id.neverBtn))
+            .waitUntilVisible()
+            .perform(click())
+    }
+
+    protected fun clickRateDialogLater() {
+        sleep(3_000)
+
+        onView(withId(R.id.laterBtn))
+            .waitUntilVisible()
+            .perform(click())
     }
 
     private fun getToastWithText(@StringRes textResId: Int): ViewInteraction {
-        return onView(withText(textResId)).inRoot(ToastMatcher())
+        return onView(withText(textResId))
+            .inRoot(ToastMatcher())
     }
 
     protected fun assertToastWithTextDisplayed(@StringRes textResId: Int) {
-        getToastWithText(textResId).check(matches(isDisplayed()))
+        getToastWithText(textResId)
+            .check(matches(isDisplayed()))
     }
 
     protected fun assertToastWithTextNotDisplayed(@StringRes textResId: Int) {
-        getToastWithText(textResId).check(matches(not(isDisplayed())))
+        getToastWithText(textResId)
+            .waitUntilVisible()
+            .check(matches(not(isDisplayed())))
     }
 
     protected fun assertRateDialogDisplayed() {
-        onView(withId(R.id.ratingBar)).check(matches(isDisplayed()))
+        onView(withId(R.id.ratingBar))
+            .waitUntilVisible()
+            .check(matches(isDisplayed()))
     }
 
     protected fun assertRateDialogNotDisplayed() {
-        onView(withId(R.id.ratingBar)).check(doesNotExist())
+        onView(withId(R.id.ratingBar))
+            .waitUntilDoesNotExist()
+            .check(doesNotExist())
     }
 
-    protected fun getText(matcher: ViewInteraction): String {
+
+    private fun getText(matcher: ViewInteraction): String {
         var text = String()
         matcher.perform(object : ViewAction {
             override fun getConstraints(): Matcher<View> {
