@@ -111,7 +111,7 @@ See config section [below](#config).
 
 ## Config
 
-Configuration is represented by class [`SmartRateConfig`](/library/src/main/java/com/g2pdev/smartrate/logic/model/SmartRateConfig.kt).
+Configuration is represented by class [`SmartRateConfig`](/library/src/main/java/com/g2pdev/smartrate/logic/model/config/SmartRateConfig.kt).
 
 | Field  | Type | Description | Default value |
 |---|---|---|---|
