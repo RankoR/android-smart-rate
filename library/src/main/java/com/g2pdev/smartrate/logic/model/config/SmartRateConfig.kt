@@ -64,6 +64,8 @@ data class SmartRateConfig(
 
     var onRateDialogShowListener: (() -> Unit)? = null,
 
+    var onRateDialogWillNotShowListener: (() -> Unit)? = null,
+
     var onRateDismissListener: (() -> Unit)? = null,
 
     var onRateListener: ((rating: Float) -> Unit)? = null,
