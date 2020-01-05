@@ -22,8 +22,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val compositeDisposable = CompositeDisposable()
 
-    private var smartRateConfig =
-        SmartRateConfig()
+    private var smartRateConfig = SmartRateConfig()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,24 +40,24 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private fun setupListeners() {
         sessionCountEt
-            .textChanges()
-            .skipInitialValue()
-            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
-            .map { it.toString() }
-            .filter { it.isDigitsOnly() }
-            .map { it.toInt() }
-            .subscribe(presenter::setSessionCount, Timber::e)
-            .disposeOnDestroy()
+                .textChanges()
+                .skipInitialValue()
+                .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+                .map { it.toString() }
+                .filter { it.isDigitsOnly() }
+                .map { it.toInt() }
+                .subscribe(presenter::setSessionCount, Timber::e)
+                .disposeOnDestroy()
 
         sessionCountBetweenPromptsEt
-            .textChanges()
-            .skipInitialValue()
-            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
-            .map { it.toString() }
-            .filter { it.isDigitsOnly() }
-            .map { it.toInt() }
-            .subscribe(presenter::setSessionCountBetweenPrompts, Timber::e)
-            .disposeOnDestroy()
+                .textChanges()
+                .skipInitialValue()
+                .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+                .map { it.toString() }
+                .filter { it.isDigitsOnly() }
+                .map { it.toInt() }
+                .subscribe(presenter::setSessionCountBetweenPrompts, Timber::e)
+                .disposeOnDestroy()
 
         incrementFakeSessionCountBtn.setOnClickListener {
             presenter.incrementFakeSessionCount()
@@ -87,9 +86,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun showCountersCleared() {
         Toast.makeText(
-            this@MainActivity,
-            R.string.title_library_counters_cleared,
-            Toast.LENGTH_LONG
+                this@MainActivity,
+                R.string.title_library_counters_cleared,
+                Toast.LENGTH_LONG
         ).show()
     }
 
@@ -119,9 +118,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun showFeedbackSubmitClicked(text: String) {
         Toast.makeText(
-            this,
-            getString(R.string.format_feedback_submit_clicked, text),
-            Toast.LENGTH_LONG
+                this,
+                getString(R.string.format_feedback_submit_clicked, text),
+                Toast.LENGTH_LONG
         ).show()
     }
 
