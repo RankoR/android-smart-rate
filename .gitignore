@@ -179,3 +179,4 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 /keystore.jks
+/deployment_cert.der
