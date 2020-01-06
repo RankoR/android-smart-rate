@@ -9,15 +9,11 @@ android:
   components:
     - tools
     - platform-tools
-
     - build-tools-29.0.2
     - android-21
     - android-29
-
     - extra-google-m2repository
     - extra-android-m2repository
-
-    #- sys-img-x86-android-29
     - sys-img-armeabi-v7a-android-21
 
 before_script:
@@ -27,13 +23,27 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
+  - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex
+  --stacktrace"
   - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
-  #- "./gradlew clean build"
 
 deploy:
-  provider: script
-  script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
-  cleanup: false
-  on:
-    branch: master
+  - provider: script
+    script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
+    cleanup: false
+    on:
+      branch: master
+
+  - provider: script
+    script:
+      - "./gradlew :app:assembleRelease"
+      - jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks app/build/outputs/apk/release/app-release-unsigned.apk smartrate
+      - zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+      - "bash ./scripts/upload_apk.sh"
+    cleanup: false
+    on:
+      branch: master
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in scripts/google-play-auth.json.enc -out scripts/google-play-auth.json -d
+  - openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv -in keystore.jks.enc -out keystore.jks -d

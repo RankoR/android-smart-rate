@@ -2,23 +2,63 @@ package com.g2pdev.smartrate.demo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.rule.ActivityTestRule
-import com.g2pdev.smartrate.demo.ui.MainActivity
-import org.junit.Assert
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class WillNotShowTest {
-
-    @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
-
+class WillNotShowTest : BaseUiTest() {
 
     @Test
-    fun testDialogWillNotShow() {
-        Assert.assertTrue(true)
+    fun testNotEnoughSessions() {
+        setSessionCount(3)
+
+        showDialog()
+
+        assertRateDialogNotDisplayed()
+
+        assertLastLogEntry(R.string.title_rate_dialog_will_not_show)
     }
+
+    @Test
+    fun testNeverClicked() {
+        setLibrarySessionCount(3)
+
+        showDialog()
+        assertRateDialogDisplayed()
+
+        clickRateDialogNever()
+        assertRateDialogNotDisplayed()
+
+        showDialog()
+        assertRateDialogNotDisplayed()
+
+        assertLogEntries(
+            R.string.title_rate_dialog_shown,
+            R.string.title_never_clicked,
+            R.string.title_rate_dialog_will_not_show
+        )
+    }
+
+    @Test
+    fun testMaybeLaterNotEnoughSessions() {
+        setLibrarySessionCount(3)
+        setSessionCountBetweenPrompts(3)
+
+        showDialog()
+        assertRateDialogDisplayed()
+
+        clickRateDialogLater()
+        assertRateDialogNotDisplayed()
+
+        showDialog()
+        assertRateDialogNotDisplayed()
+
+        assertLogEntries(
+            R.string.title_rate_dialog_shown,
+            R.string.title_later_clicked,
+            R.string.title_rate_dialog_will_not_show
+        )
+    }
+
 }

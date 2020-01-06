@@ -1,5 +1,6 @@
 package com.g2pdev.smartrate.demo.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
@@ -40,24 +41,24 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private fun setupListeners() {
         sessionCountEt
-                .textChanges()
-                .skipInitialValue()
-                .debounce(inputDebounce, TimeUnit.MILLISECONDS)
-                .map { it.toString() }
-                .filter { it.isDigitsOnly() }
-                .map { it.toInt() }
-                .subscribe(presenter::setSessionCount, Timber::e)
-                .disposeOnDestroy()
+            .textChanges()
+            .skipInitialValue()
+            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+            .map { it.toString() }
+            .filter { it.isDigitsOnly() }
+            .map { it.toInt() }
+            .subscribe(presenter::setSessionCount, Timber::e)
+            .disposeOnDestroy()
 
         sessionCountBetweenPromptsEt
-                .textChanges()
-                .skipInitialValue()
-                .debounce(inputDebounce, TimeUnit.MILLISECONDS)
-                .map { it.toString() }
-                .filter { it.isDigitsOnly() }
-                .map { it.toInt() }
-                .subscribe(presenter::setSessionCountBetweenPrompts, Timber::e)
-                .disposeOnDestroy()
+            .textChanges()
+            .skipInitialValue()
+            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+            .map { it.toString() }
+            .filter { it.isDigitsOnly() }
+            .map { it.toInt() }
+            .subscribe(presenter::setSessionCountBetweenPrompts, Timber::e)
+            .disposeOnDestroy()
 
         incrementFakeSessionCountBtn.setOnClickListener {
             presenter.incrementFakeSessionCount()
@@ -84,44 +85,46 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fakeSessionCountTv.text = getString(R.string.format_fake_session_count, sessionCount)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun addLogEntry(text: String) {
+        logsTv.text = logsTv.text.toString() + "\n" + text
+    }
+
+    private fun showLogMessage(text: String) {
+        addLogEntry(text)
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
+
     override fun showCountersCleared() {
-        Toast.makeText(
-                this@MainActivity,
-                R.string.title_library_counters_cleared,
-                Toast.LENGTH_LONG
-        ).show()
+        showLogMessage(getString(R.string.title_library_counters_cleared))
     }
 
     override fun showRateDialogShown() {
-        Toast.makeText(this, R.string.title_rate_dialog_shown, Toast.LENGTH_LONG).show()
+        showLogMessage(getString(R.string.title_rate_dialog_shown))
     }
 
     override fun showRateDialogWillNotShow() {
-        Toast.makeText(this, R.string.title_rate_dialog_will_not_show, Toast.LENGTH_LONG).show()
+        showLogMessage(getString(R.string.title_rate_dialog_will_not_show))
     }
 
     override fun showRated(stars: Float) {
-        Toast.makeText(this, getString(R.string.format_rated, stars), Toast.LENGTH_LONG).show()
+        showLogMessage(getString(R.string.format_rated, stars))
     }
 
     override fun showNeverClicked() {
-        Toast.makeText(this, R.string.title_never_clicked, Toast.LENGTH_LONG).show()
+        showLogMessage(getString(R.string.title_never_clicked))
     }
 
     override fun showLaterClicked() {
-        Toast.makeText(this, R.string.title_later_clicked, Toast.LENGTH_LONG).show()
+        showLogMessage(getString(R.string.title_later_clicked))
     }
 
     override fun showFeedbackCancelClicked() {
-        Toast.makeText(this, R.string.title_feedback_cancel_clicked, Toast.LENGTH_LONG).show()
+        showLogMessage(getString(R.string.title_feedback_cancel_clicked))
     }
 
     override fun showFeedbackSubmitClicked(text: String) {
-        Toast.makeText(
-                this,
-                getString(R.string.format_feedback_submit_clicked, text),
-                Toast.LENGTH_LONG
-        ).show()
+        showLogMessage(getString(R.string.format_feedback_submit_clicked, text))
     }
 
     override fun setConfig(config: SmartRateConfig) {
