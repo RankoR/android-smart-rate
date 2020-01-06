@@ -191,7 +191,19 @@ This library uses:
 I believe it's implemented following the Clean Architecture principles.
 This implementation probably seems over-engineered for such simple task, but, on the other hand, it's pretty testable and extensible.
 
+### Tests
+
 All interactors, repository and some caches are covered by tests (see [tests](library/src/androidTest/java/com/g2pdev/smartrate/))
+
+UI is also almost fully covered by tests with Espresso (see [tests](app/src/androidTest/java/com/g2pdev/smartrate/demo/))
+
+### CI/CD
+
+Every pull request to `master` is checked by Travis CI.
+
+When pull request to `master` is merged, Travis CI:
+- Builds library and uploads it to Bintray
+- Builds APK, signs it and uploads to Google Play using Fastlane Supply
 
 ## Contributions
 
