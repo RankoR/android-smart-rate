@@ -180,3 +180,4 @@ gradle-app.setting
 
 /keystore.jks
 /deployment_cert.der
+/scripts/google-play-auth.json

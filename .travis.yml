@@ -1,34 +1,49 @@
 language: android
 dist: trusty
+
 branches:
   only:
-  - master
+    - master
+
 android:
   components:
-  - tools
-  - platform-tools
-  - build-tools-29.0.2
-  - android-21
-  - android-29
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - sys-img-armeabi-v7a-android-21
+    - tools
+    - platform-tools
+    - build-tools-29.0.2
+    - android-21
+    - android-29
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-21
+
 before_script:
-- echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a -c
-  100M
-- emulator -avd test -no-audio -no-window &
-- android-wait-for-emulator
-- adb shell input keyevent 82 &
+  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a -c 100M
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
 script:
-- "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex
+  - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex
   --stacktrace"
-- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+
 deploy:
-  provider: script
-  script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
-  cleanup: false
-  on:
-    branch: master
+  - provider: script
+    script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
+    cleanup: false
+    on:
+      branch: master
+
+  - provider: script
+    script:
+      - "./gradlew :app:assembleRelease"
+      - jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks app/build/outputs/apk/release/app-release-unsigned.apk smartrate
+      - zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+      - "bash ./scripts/upload_apk.sh"
+    cleanup: false
+    on:
+      branch: master
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv
-  -in keystore.jks.enc -out keystore.jks -d
+  - openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in google-play-auth.json.enc -out google-play-auth.json -d
+  - openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv -in keystore.jks.enc -out keystore.jks -d
