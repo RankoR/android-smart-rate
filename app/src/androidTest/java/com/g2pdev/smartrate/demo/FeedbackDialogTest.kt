@@ -44,6 +44,12 @@ class FeedbackDialogTest : BaseUiTest() {
         onView(withId(R.id.cancelBtn)).perform(click())
 
         assertFeedbackDialogNotDisplayed()
+
+        assertLogEntries(
+            getString(R.string.title_rate_dialog_shown),
+            getString(R.string.format_rated, 3f),
+            getString(R.string.title_feedback_cancel_clicked)
+        )
     }
 
     @Test
@@ -72,4 +78,29 @@ class FeedbackDialogTest : BaseUiTest() {
         onView(withId(R.id.submitBtn)).check(matches(not(isEnabled())))
     }
 
+    @Test
+    fun testFeedbackDialogSubmit() {
+        setLibrarySessionCount(3)
+
+        showDialog()
+        assertRateDialogDisplayed()
+
+        setRating(3f)
+
+        assertRateDialogNotDisplayed()
+        assertFeedbackDialogDisplayed()
+
+        sleep(3_000)
+
+        onView(withId(R.id.feedbackEt)).perform(replaceText("123456"))
+        onView(withId(R.id.submitBtn)).perform(click())
+
+        assertFeedbackDialogNotDisplayed()
+
+        assertLogEntries(
+            getString(R.string.title_rate_dialog_shown),
+            getString(R.string.format_rated, 3f),
+            getString(R.string.format_feedback_submit_clicked, "123456")
+        )
+    }
 }

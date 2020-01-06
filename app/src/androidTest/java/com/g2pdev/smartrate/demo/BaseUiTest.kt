@@ -1,25 +1,23 @@
 package com.g2pdev.smartrate.demo
 
-import android.view.View
-import android.widget.TextView
+import android.app.Activity
 import androidx.annotation.StringRes
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.RootMatchers.withDecorView
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.g2pdev.smartrate.demo.matcher.ToastMatcher
+import androidx.test.platform.app.InstrumentationRegistry
 import com.g2pdev.smartrate.demo.ui.MainActivity
+import com.g2pdev.smartrate.demo.util.getText
 import com.g2pdev.smartrate.demo.util.waitUntilDoesNotExist
 import com.g2pdev.smartrate.demo.util.waitUntilVisible
 import com.g2pdev.smartrate.demo.view_action.SetRatingBarValue
-import org.hamcrest.Matcher
-import org.hamcrest.Matchers.not
+import org.hamcrest.Matchers.`is`
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import java.util.regex.Pattern
@@ -35,7 +33,7 @@ abstract class BaseUiTest {
     }
 
     protected fun getCurrentSessionCount(): Int {
-        val text = getText(onView(withId(R.id.fakeSessionCountTv)))
+        val text = onView(withId(R.id.fakeSessionCountTv)).getText()
 
         val numberPattern = Pattern.compile("(\\d+)")
         val matcher = numberPattern.matcher(text)
@@ -106,20 +104,38 @@ abstract class BaseUiTest {
             .perform(click())
     }
 
-    private fun getToastWithText(@StringRes textResId: Int): ViewInteraction {
-        return onView(withText(textResId))
-            .inRoot(ToastMatcher())
+    private fun getLogsText(): String {
+        return onView(withId(R.id.logsTv))
+            .inRoot(withDecorView(`is`(getActivity()!!.window.decorView)))
+            .getText()
     }
 
-    protected fun assertToastWithTextDisplayed(@StringRes textResId: Int) {
-        getToastWithText(textResId)
-            .check(matches(isDisplayed()))
+    private fun getLastLogEntry(): String {
+        return getLogsText()
+            .split("\n")
+            .lastOrNull() ?: ""
     }
 
-    protected fun assertToastWithTextNotDisplayed(@StringRes textResId: Int) {
-        getToastWithText(textResId)
-            .waitUntilVisible()
-            .check(matches(not(isDisplayed())))
+    protected fun assertLastLogEntry(@StringRes textResId: Int) {
+        assertLastLogEntry(getString(textResId))
+    }
+
+    protected fun assertLogEntries(@StringRes vararg textResIds: Int) {
+        val text = textResIds.joinToString("\n", transform = ::getString)
+        val logsText = getLogsText().trim()
+
+        assertEquals(text, logsText)
+    }
+
+    protected fun assertLogEntries(vararg lines: String) {
+        val text = lines.joinToString("\n")
+        val logsText = getLogsText().trim()
+
+        assertEquals(text, logsText)
+    }
+
+    protected fun assertLastLogEntry(text: String) {
+        assertEquals("Last log entry does not match", text, getLastLogEntry())
     }
 
     protected fun assertRateDialogDisplayed() {
@@ -146,25 +162,21 @@ abstract class BaseUiTest {
             .check(doesNotExist())
     }
 
-
-    private fun getText(matcher: ViewInteraction): String {
-        var text = String()
-        matcher.perform(object : ViewAction {
-            override fun getConstraints(): Matcher<View> {
-                return isAssignableFrom(TextView::class.java)
-            }
-
-            override fun getDescription(): String {
-                return "Text of the view"
-            }
-
-            override fun perform(uiController: UiController, view: View) {
-                val tv = view as TextView
-                text = tv.text.toString()
-            }
-        })
-
-        return text
+    private fun getActivity(): Activity? {
+        var activity: Activity? = null
+        activityRule.scenario.onActivity {
+            activity = it
+        }
+        return activity
     }
+
+    protected fun getString(@StringRes resId: Int): String {
+        return InstrumentationRegistry.getInstrumentation().targetContext.getString(resId)
+    }
+
+    protected fun getString(@StringRes resId: Int, vararg formatArgs: Any): String {
+        return InstrumentationRegistry.getInstrumentation().targetContext.getString(resId, *formatArgs)
+    }
+
 
 }

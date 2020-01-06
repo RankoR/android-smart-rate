@@ -11,12 +11,13 @@ class WillNotShowTest : BaseUiTest() {
 
     @Test
     fun testNotEnoughSessions() {
-        setLibrarySessionCount(3)
+        setSessionCount(3)
 
         showDialog()
 
-        assertToastWithTextDisplayed(R.string.title_rate_dialog_will_not_show)
         assertRateDialogNotDisplayed()
+
+        assertLastLogEntry(R.string.title_rate_dialog_will_not_show)
     }
 
     @Test
@@ -31,6 +32,12 @@ class WillNotShowTest : BaseUiTest() {
 
         showDialog()
         assertRateDialogNotDisplayed()
+
+        assertLogEntries(
+            R.string.title_rate_dialog_shown,
+            R.string.title_never_clicked,
+            R.string.title_rate_dialog_will_not_show
+        )
     }
 
     @Test
@@ -46,6 +53,12 @@ class WillNotShowTest : BaseUiTest() {
 
         showDialog()
         assertRateDialogNotDisplayed()
+
+        assertLogEntries(
+            R.string.title_rate_dialog_shown,
+            R.string.title_later_clicked,
+            R.string.title_rate_dialog_will_not_show
+        )
     }
 
 }
