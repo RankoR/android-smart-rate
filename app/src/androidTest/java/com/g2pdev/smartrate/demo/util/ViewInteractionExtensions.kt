@@ -14,7 +14,7 @@ import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
 import java.util.concurrent.TimeoutException
 
-fun ViewInteraction.getText(): String {
+internal fun ViewInteraction.getText(): String {
     var text = ""
 
     perform(object : ViewAction {
@@ -35,7 +35,7 @@ fun ViewInteraction.getText(): String {
     return text
 }
 
-fun ViewInteraction.waitUntilVisible(timeout: Long = 10_000): ViewInteraction {
+internal fun ViewInteraction.waitUntilVisible(timeout: Long = 10_000): ViewInteraction {
     val startTime = System.currentTimeMillis()
     val endTime = startTime + timeout
 
@@ -51,7 +51,7 @@ fun ViewInteraction.waitUntilVisible(timeout: Long = 10_000): ViewInteraction {
     throw TimeoutException()
 }
 
-fun ViewInteraction.waitUntilDoesNotExist(timeout: Long = 10_000): ViewInteraction {
+internal fun ViewInteraction.waitUntilDoesNotExist(timeout: Long = 10_000): ViewInteraction {
     val startTime = System.currentTimeMillis()
     val endTime = startTime + timeout
 
