@@ -36,9 +36,11 @@ deploy:
 
   - provider: script
     script: >
+      openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv -in keystore.jks.enc -out keystore.jks -d &&
       ./gradlew :app:assembleRelease &&
       jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks app/build/outputs/apk/release/app-release-unsigned.apk smartrate &&
       zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk &&
+      openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in scripts/google-play-auth.json.enc -out scripts/google-play-auth.json -d &&
       bash ./scripts/upload_apk.sh
     cleanup: false
     on:
