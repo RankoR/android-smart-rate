@@ -33,6 +33,14 @@ script:
 #- "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
 #- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv -in keystore.jks.enc -out keystore.jks -d
+  - ./gradlew :app:assembleRelease
+  - jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks ${RELEASE_APK_DIR}/app-release-unsigned.apk smartrate
+  - jarsigner -verify ${RELEASE_APK_DIR}/app-release-unsigned.apk
+  - ${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}/ -v 4 ${RELEASE_APK_DIR}/app-release-unsigned.apk ${RELEASE_APK_DIR}/app-release.apk
+  - openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in scripts/google-play-auth.json.enc -out scripts/google-play-auth.json -d
+
 deploy:
   #- provider: script
   #  script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
@@ -41,14 +49,15 @@ deploy:
   #    branch: master
 
   - provider: script
-    script: >
-      openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv -in keystore.jks.enc -out keystore.jks -d &&
-      ./gradlew :app:assembleRelease &&
-      jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks ${RELEASE_APK_DIR}/app-release-unsigned.apk smartrate &&
-      jarsigner -verify ${RELEASE_APK_DIR}/app-release-unsigned.apk
-      ${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}/ -v 4 ${RELEASE_APK_DIR}/app-release-unsigned.apk ${RELEASE_APK_DIR}/app-release.apk &&
-      openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in scripts/google-play-auth.json.enc -out scripts/google-play-auth.json -d &&
-      bash ./scripts/upload_apk.sh
+    script: "bash ./scripts/upload_apk.sh"
+#    script: >
+#      openssl aes-256-cbc -K $encrypted_556c6bd2f1bc_key -iv $encrypted_556c6bd2f1bc_iv -in keystore.jks.enc -out keystore.jks -d &&
+#      ./gradlew :app:assembleRelease &&
+#      jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks ${RELEASE_APK_DIR}/app-release-unsigned.apk smartrate &&
+#      jarsigner -verify ${RELEASE_APK_DIR}/app-release-unsigned.apk &&
+#      ${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}/ -v 4 ${RELEASE_APK_DIR}/app-release-unsigned.apk ${RELEASE_APK_DIR}/app-release.apk &&
+#      openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in scripts/google-play-auth.json.enc -out scripts/google-play-auth.json -d &&
+#      bash ./scripts/upload_apk.sh
     cleanup: false
     on:
       branch: master
