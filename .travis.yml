@@ -45,6 +45,7 @@ deploy:
   #- provider: script
   #  script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
   #  cleanup: false
+  #  skip_cleanup: true
   #  on:
   #    branch: master
 
@@ -59,6 +60,7 @@ deploy:
 #      openssl aes-256-cbc -K $encrypted_d35d4fcb5b96_key -iv $encrypted_d35d4fcb5b96_iv -in scripts/google-play-auth.json.enc -out scripts/google-play-auth.json -d &&
 #      bash ./scripts/upload_apk.sh
     cleanup: false
+    skip_cleanup: true
     on:
       branch: master
 
