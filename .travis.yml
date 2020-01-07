@@ -10,7 +10,7 @@ env:
     - ANDROID_API=29
     - EMULATOR_API=21
     - ANDROID_BUILD_TOOLS=29.0.2
-    - RELEASE_APK_DIR = app/build/outputs/apk/release
+    - RELEASE_APK_DIR=app/build/outputs/apk/release
 
 android:
   components:
