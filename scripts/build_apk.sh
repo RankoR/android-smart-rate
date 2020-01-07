@@ -23,4 +23,4 @@ jarsigner -verify "${RELEASE_APK_DIR}"/app-release-unsigned.apk
 "${ANDROID_HOME}"/build-tools/"${ANDROID_BUILD_TOOLS}"/zipalign \
   -v 4 \
   "${RELEASE_APK_DIR}"/app-release-unsigned.apk \
-  ""${RELEASE_APK_DIR}"/app-release.apk
+  "${RELEASE_APK_DIR}"/app-release.apk
