@@ -36,10 +36,10 @@ deploy:
 
   - provider: script
     script: >
-      "./gradlew :app:assembleRelease" &&
+      ./gradlew :app:assembleRelease &&
       jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg SHA1 -keystore keystore.jks app/build/outputs/apk/release/app-release-unsigned.apk smartrate &&
       zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk &&
-      "bash ./scripts/upload_apk.sh"
+      bash ./scripts/upload_apk.sh
     cleanup: false
     on:
       branch: master

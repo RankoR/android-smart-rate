@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [1.0.0-alpha07] - 2020-01-07
+
+### Fixed
+- Travis CI config for APK deployment (probably)
+
 ## [1.0.0-alpha06] - 2020-01-07
 
 ### Fixed
