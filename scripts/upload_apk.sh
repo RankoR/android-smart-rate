@@ -4,11 +4,6 @@ set -e
 
 gem install fastlane
 
-ls -la "${TRAVIS_BUILD_DIR}/"
-ls -la "${TRAVIS_BUILD_DIR}/app/"
-ls -la "${TRAVIS_BUILD_DIR}/app/build/"
-ls -la "${TRAVIS_BUILD_DIR}/app/build/outputs/"
-ls -la "${TRAVIS_BUILD_DIR}/app/build/outputs/apk/"
 ls -la "${TRAVIS_BUILD_DIR}/${RELEASE_APK_DIR}/"
 
 fastlane supply \
