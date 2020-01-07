@@ -28,11 +28,11 @@ script:
   - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 
 deploy:
-  - provider: script
-    script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
-    cleanup: false
-    on:
-      branch: master
+  #- provider: script
+  #  script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
+  #  cleanup: false
+  #  on:
+  #    branch: master
 
   - provider: script
     script: >
