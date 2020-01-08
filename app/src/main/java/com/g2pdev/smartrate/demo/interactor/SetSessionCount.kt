@@ -3,7 +3,13 @@ package com.g2pdev.smartrate.demo.interactor
 import com.g2pdev.smartrate.demo.repository.SettingsRepository
 import io.reactivex.Completable
 
+/**
+ * Set session count for library config
+ */
 interface SetSessionCount {
+    /**
+     * Save the session count
+     */
     fun exec(sessionCount: Int): Completable
 }
 

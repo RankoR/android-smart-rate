@@ -5,6 +5,9 @@ import androidx.test.filters.LargeTest
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Test scenarios when the dialog will not be shown
+ */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class WillNotShowTest : BaseUiTest() {

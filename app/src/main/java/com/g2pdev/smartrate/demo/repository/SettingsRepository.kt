@@ -6,6 +6,9 @@ import com.g2pdev.smartrate.demo.cache.SessionCountCache
 import io.reactivex.Completable
 import io.reactivex.Single
 
+/**
+ * Stores and retrieves various parameters for app and library
+ */
 interface SettingsRepository {
     fun getSessionCount(): Single<Int>
     fun setSessionCount(sessionCount: Int): Completable
