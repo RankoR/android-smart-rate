@@ -1,6 +1,4 @@
 apply plugin: "com.diffplug.gradle.spotless"
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 spotless {
     java {
@@ -11,6 +9,7 @@ spotless {
         indentWithSpaces()
         endWithNewline()
     }
+
     kotlin {
         target '**/*.kt'
         ktlint()
@@ -18,6 +17,7 @@ spotless {
         indentWithSpaces()
         endWithNewline()
     }
+
     format 'misc', {
         target '**/*.gradle', '**/*.md', '**/.gitignore'
         indentWithSpaces()

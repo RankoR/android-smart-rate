@@ -21,8 +21,8 @@ buildscript {
     repositories {
         google()
         jcenter()
-
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0-alpha07"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -35,6 +35,5 @@ allprojects {
     repositories {
         google()
         jcenter()
-
     }
 }
