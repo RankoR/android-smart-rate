@@ -14,6 +14,9 @@ import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
 import java.util.concurrent.TimeoutException
 
+/**
+ * Get text from the given view interaction (works only on TextView and its descendants)
+ */
 internal fun ViewInteraction.getText(): String {
     var text = ""
 
@@ -35,6 +38,11 @@ internal fun ViewInteraction.getText(): String {
     return text
 }
 
+/**
+ * Waits until view in given ViewInteraction become visible
+ *
+ * @param timeout Maximum wait timeout, default = 10 000 ms
+ */
 internal fun ViewInteraction.waitUntilVisible(timeout: Long = 10_000): ViewInteraction {
     val startTime = System.currentTimeMillis()
     val endTime = startTime + timeout
@@ -51,6 +59,11 @@ internal fun ViewInteraction.waitUntilVisible(timeout: Long = 10_000): ViewInter
     throw TimeoutException()
 }
 
+/**
+ * Waits until view in given ViewInteraction disappears in root
+ *
+ * @param timeout Maximum wait timeout, default = 10 000 ms
+ */
 internal fun ViewInteraction.waitUntilDoesNotExist(timeout: Long = 10_000): ViewInteraction {
     val startTime = System.currentTimeMillis()
     val endTime = startTime + timeout
