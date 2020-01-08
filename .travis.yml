@@ -1,6 +1,6 @@
 language: android
 dist: trusty
-
+jdk: oraclejdk8
 
 if: branch = master OR tag IS present
 
@@ -10,6 +10,17 @@ env:
     - EMULATOR_API=21
     - ANDROID_BUILD_TOOLS=29.0.2
     - RELEASE_APK_DIR=app/build/outputs/apk/release
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - "${TRAVIS_BUILD_DIR}/gradle/caches/"
+    - "${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/"
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 
 android:
   components:
