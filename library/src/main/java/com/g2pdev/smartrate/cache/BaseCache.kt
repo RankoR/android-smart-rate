@@ -6,6 +6,10 @@ import com.google.gson.Gson
 import io.reactivex.Completable
 import io.reactivex.Single
 
+/**
+ * Base cache class, uses SharedPreferences to store values.
+ * Values are stored as JSON strings (serialized by GSON)
+ */
 internal abstract class BaseCache<T>(
     private val gson: Gson,
     context: Context,
