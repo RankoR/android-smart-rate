@@ -17,16 +17,16 @@ import com.g2pdev.smartrate.demo.util.getText
 import com.g2pdev.smartrate.demo.util.waitUntilDoesNotExist
 import com.g2pdev.smartrate.demo.util.waitUntilVisible
 import com.g2pdev.smartrate.demo.view_action.SetRatingBarValue
+import java.util.regex.Pattern
 import org.hamcrest.Matchers.`is`
 import org.junit.Assert.assertEquals
 import org.junit.Rule
-import java.util.regex.Pattern
-
 
 abstract class BaseUiTest {
 
     @get:Rule
-    var activityRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
+    var activityRule: ActivityScenarioRule<MainActivity> =
+        ActivityScenarioRule(MainActivity::class.java)
 
     protected fun sleep(ms: Long) {
         Thread.sleep(ms)
@@ -175,8 +175,9 @@ abstract class BaseUiTest {
     }
 
     protected fun getString(@StringRes resId: Int, vararg formatArgs: Any): String {
-        return InstrumentationRegistry.getInstrumentation().targetContext.getString(resId, *formatArgs)
+        return InstrumentationRegistry.getInstrumentation().targetContext.getString(
+            resId,
+            *formatArgs
+        )
     }
-
-
 }

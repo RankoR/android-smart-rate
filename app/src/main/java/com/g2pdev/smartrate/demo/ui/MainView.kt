@@ -25,5 +25,4 @@ interface MainView : MvpView {
     fun showFeedbackSubmitClicked(text: String)
 
     fun setConfig(config: SmartRateConfig)
-
 }

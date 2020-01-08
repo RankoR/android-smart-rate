@@ -4,10 +4,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.interactor.session_count.GetSessionCount
 import com.g2pdev.smartrate.interactor.session_count.IncrementSessionCount
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 internal class SessionCountInteractorTest : BaseTest() {
@@ -46,5 +46,4 @@ internal class SessionCountInteractorTest : BaseTest() {
             .test()
             .assertValue(2)
     }
-
 }

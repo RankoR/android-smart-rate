@@ -4,10 +4,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.interactor.never_ask.IsNeverAsk
 import com.g2pdev.smartrate.interactor.never_ask.SetNeverAsk
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 internal class NeverAskInteractorTest : BaseTest() {
@@ -41,5 +41,4 @@ internal class NeverAskInteractorTest : BaseTest() {
             .test()
             .assertValue(true)
     }
-
 }

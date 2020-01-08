@@ -7,5 +7,4 @@ enum class Store {
     XIAOMI,
     SAMSUNG,
 //    APTOIDE // TODO: Don't know how to link with package name
-
 }
