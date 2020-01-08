@@ -45,14 +45,14 @@ deploy:
     script: "bash ./scripts/build_apk.sh && bash ./scripts/upload_apk.sh"
     skip_cleanup: true
     on:
-      branch: master
+      tags: true
 
   - provider: releases
     api_key: $GITHUB_ACCESS_TOKEN
-    file: ${RELEASE_APK_DIR}/app-release-unsigned.apk ${RELEASE_APK_DIR}/app-release.apk
+    file: ${RELEASE_APK_DIR}/app-release.apk
     skip_cleanup: true
     on:
-      branch: master
+      tags: true
 
 
 before_install:
