@@ -42,7 +42,7 @@ before_script:
 script:
   - "./gradlew spotlessCheck"
   - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
-  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - "./gradlew :app:clean :app:build :app:connectedCheck -PdisablePreDex --stacktrace"
 
 deploy:
   - provider: script
