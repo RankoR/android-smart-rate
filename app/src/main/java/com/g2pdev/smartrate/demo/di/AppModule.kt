@@ -21,6 +21,9 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * Main dagger module
+ */
 @Module
 class AppModule(
     private val context: Context

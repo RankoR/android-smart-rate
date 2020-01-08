@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 
 /**
- * Stores session count
+ * Stores session count setting (value is used in library config)
  */
 class SessionCountCache(
     gson: Gson,
