@@ -1,6 +1,4 @@
 apply plugin: "com.diffplug.gradle.spotless"
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 spotless {
     java {
