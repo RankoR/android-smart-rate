@@ -10,7 +10,6 @@ import com.g2pdev.smartrate.logic.RateDisplayer
 import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import timber.log.Timber
 
-
 object SmartRate {
 
     private lateinit var rateComponent: RateComponent
@@ -85,5 +84,4 @@ object SmartRate {
     fun testIncrementSessionCount() {
         rateDisplayer.incrementSessionCount(test = true)
     }
-
 }

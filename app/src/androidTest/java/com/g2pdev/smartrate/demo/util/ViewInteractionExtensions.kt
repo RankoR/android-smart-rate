@@ -10,9 +10,9 @@ import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import java.util.concurrent.TimeoutException
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
-import java.util.concurrent.TimeoutException
 
 /**
  * Get text from the given view interaction (works only on TextView and its descendants)

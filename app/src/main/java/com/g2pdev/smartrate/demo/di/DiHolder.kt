@@ -25,5 +25,4 @@ object DiHolder {
     fun plusAppComponent(): AppComponent {
         return appComponent
     }
-
 }

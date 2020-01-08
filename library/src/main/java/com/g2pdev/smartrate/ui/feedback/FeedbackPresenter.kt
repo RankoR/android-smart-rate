@@ -17,5 +17,4 @@ internal class FeedbackPresenter : BasePresenter<FeedbackView>() {
 
         viewState.enableSubmitButton(isSubmitButtonEnabled)
     }
-
 }

@@ -69,11 +69,9 @@ internal abstract class BaseCache<T>(
         }
     }
 
-
     class NoValueException : Exception()
 
     private companion object {
         private val defaultStringValue = null
     }
-
 }

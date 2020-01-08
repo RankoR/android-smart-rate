@@ -10,11 +10,11 @@ import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 

@@ -2,11 +2,10 @@ package com.g2pdev.smartrate
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.repository.RateRepository
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
-
 
 @RunWith(AndroidJUnit4::class)
 internal class RateRepositoryTest : BaseTest() {
@@ -91,5 +90,4 @@ internal class RateRepositoryTest : BaseTest() {
             .test()
             .assertValue(10)
     }
-
 }

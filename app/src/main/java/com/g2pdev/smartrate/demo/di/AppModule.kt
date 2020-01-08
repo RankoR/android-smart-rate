@@ -8,7 +8,12 @@ import com.g2pdev.smartrate.demo.interactor.GetSessionCount
 import com.g2pdev.smartrate.demo.interactor.GetSessionCountImpl
 import com.g2pdev.smartrate.demo.interactor.SetSessionCount
 import com.g2pdev.smartrate.demo.interactor.SetSessionCountImpl
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.*
+import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCount
+import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCountImpl
+import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCount
+import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCountImpl
+import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCount
+import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCountImpl
 import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPrompts
 import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPromptsImpl
 import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPrompts

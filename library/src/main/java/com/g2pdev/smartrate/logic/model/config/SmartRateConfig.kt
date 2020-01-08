@@ -93,5 +93,4 @@ data class SmartRateConfig(
         const val defaultMinRatingForStore = 4f
         const val defaultMinFeedbackLength = 6
     }
-
 }

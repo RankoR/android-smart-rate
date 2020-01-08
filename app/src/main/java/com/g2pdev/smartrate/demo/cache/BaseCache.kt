@@ -89,5 +89,4 @@ abstract class BaseCache<T>(
     private companion object {
         private const val defaultStringValue = ""
     }
-
 }

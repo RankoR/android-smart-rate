@@ -16,5 +16,4 @@ internal interface RateComponent {
     fun inject(rateDisplayer: RateDisplayer)
 
     fun inject(presenter: RatePresenter)
-
 }
