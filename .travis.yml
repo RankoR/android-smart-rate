@@ -62,6 +62,7 @@ deploy:
     file: ${RELEASE_APK_DIR}/app-release.apk
     tag_name: $TRAVIS_TAG
     name: $TRAVIS_TAG
+    body: "Release $TRAVIS_TAG"
     skip_cleanup: true
     on:
       tags: true
