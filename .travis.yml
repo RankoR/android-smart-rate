@@ -4,12 +4,6 @@ dist: trusty
 
 if: branch = master OR tag IS present
 
-#branches:
-#  only:
-#    - master
-#tags:
-
-
 env:
   global:
     - ANDROID_API=29
@@ -23,28 +17,27 @@ android:
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
+    - android-$EMULATOR_API
     - extra-google-m2repository
     - extra-android-m2repository
-    #- sys-img-armeabi-v7a-android-$EMULATOR_API
+    - sys-img-armeabi-v7a-android-$EMULATOR_API
 
-  #before_script:
-  #- echo no | android create avd --force -n test -t android-$EMULATOR_API --abi armeabi-v7a -c 100M
-  #- emulator -avd test -no-audio -no-window &
-  #- android-wait-for-emulator
-  #- adb shell input keyevent 82 &
+before_script:
+  - echo no | android create avd --force -n test -t android-${EMULATOR_API} --abi armeabi-v7a -c 100M
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
 
 script:
-  echo yes
-#- "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
-#- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
-
+  - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
+  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 
 deploy:
-  #- provider: script
-  #  script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
-  #  skip_cleanup: true
-  #  on:
-  #    branch: master
+  - provider: script
+    script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
+    skip_cleanup: true
+    on:
+      tags: true
 
   - provider: script
     script: "bash ./scripts/build_apk.sh && bash ./scripts/upload_apk.sh"
