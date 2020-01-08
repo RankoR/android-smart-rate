@@ -3,6 +3,9 @@ package com.g2pdev.smartrate.demo.cache
 import android.content.Context
 import com.google.gson.Gson
 
+/**
+ * Stores session count
+ */
 class SessionCountCache(
     gson: Gson,
     context: Context
