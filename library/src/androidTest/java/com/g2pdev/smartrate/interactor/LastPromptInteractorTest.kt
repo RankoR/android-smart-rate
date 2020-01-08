@@ -5,10 +5,10 @@ import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.cache.SessionCountCache
 import com.g2pdev.smartrate.interactor.last_prompt.GetLastPromptSession
 import com.g2pdev.smartrate.interactor.last_prompt.SetLastPromptSessionToCurrent
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 internal class LastPromptInteractorTest : BaseTest() {
@@ -50,5 +50,4 @@ internal class LastPromptInteractorTest : BaseTest() {
             .test()
             .assertValue(10)
     }
-
 }

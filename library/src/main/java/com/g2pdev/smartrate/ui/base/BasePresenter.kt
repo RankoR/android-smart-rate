@@ -26,5 +26,4 @@ internal abstract class BasePresenter<T> : MvpPresenter<T>() where T : MvpView {
         compositeDisposable.add(this)
         return this
     }
-
 }

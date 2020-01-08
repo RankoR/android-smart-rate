@@ -19,5 +19,4 @@ interface AppComponent {
     fun inject(app: App)
 
     fun inject(presenter: MainPresenter)
-
 }

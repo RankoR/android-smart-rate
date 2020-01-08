@@ -63,5 +63,4 @@ class WillNotShowTest : BaseUiTest() {
             R.string.title_rate_dialog_will_not_show
         )
     }
-
 }

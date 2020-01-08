@@ -4,10 +4,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.cache.BaseCache
 import com.g2pdev.smartrate.cache.IsRatedCache
 import com.g2pdev.smartrate.cache.LastPromptSessionCache
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 /**
  * Test just these two caches, because other are implemented the same way
@@ -72,5 +72,4 @@ internal class CachesTest : BaseTest() {
             .test()
             .assertValue(100500)
     }
-
 }

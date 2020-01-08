@@ -9,9 +9,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 import moxy.MvpBottomSheetDialogFragment
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 internal abstract class BaseBottomDialogFragment : MvpBottomSheetDialogFragment() {
 
@@ -72,5 +72,4 @@ internal abstract class BaseBottomDialogFragment : MvpBottomSheetDialogFragment(
     protected fun Disposable.disposeOnDestroy() {
         compositeDisposable.add(this)
     }
-
 }

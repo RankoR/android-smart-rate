@@ -5,10 +5,10 @@ import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.interactor.store.GetStoreLink
 import com.g2pdev.smartrate.logic.model.Store
 import com.g2pdev.smartrate.logic.model.StoreLink
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 internal class GetStoreLinkInteractorTest : BaseTest() {
@@ -74,9 +74,7 @@ internal class GetStoreLinkInteractorTest : BaseTest() {
             )
     }
 
-
     private companion object {
         private const val packageName = "com.g2pdev.smartrate.demo"
     }
-
 }

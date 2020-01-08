@@ -41,7 +41,8 @@ internal class RateDialogFragment : BaseBottomDialogFragment(), RateView {
             ?.let { config ->
 
                 val fallbackIconDrawable = context?.getDrawableCompat(R.drawable.star)
-                val overrideIconDrawable = config.iconDrawableResId?.let { context?.getDrawableCompat(it) }
+                val overrideIconDrawable =
+                    config.iconDrawableResId?.let { context?.getDrawableCompat(it) }
 
                 presenter.loadAppIcon(overrideIconDrawable, fallbackIconDrawable)
 
@@ -59,7 +60,6 @@ internal class RateDialogFragment : BaseBottomDialogFragment(), RateView {
                 if (!config.isDismissible) {
                     disableDismiss()
                 }
-
             } ?: run(::close)
 
         ratingBar.setOnRatingBarChangeListener { _, rating, fromUser ->
@@ -105,6 +105,5 @@ internal class RateDialogFragment : BaseBottomDialogFragment(), RateView {
                     arguments = bundleOf(argConfig to config)
                 }
         }
-
     }
 }

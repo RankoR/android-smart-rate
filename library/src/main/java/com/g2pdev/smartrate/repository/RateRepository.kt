@@ -30,7 +30,6 @@ internal class RateRepositoryImpl(
     private val lastPromptSessionCache: LastPromptSessionCache
 ) : RateRepository {
 
-
     override fun getSessionCount(): Single<Int> {
         return sessionCountCache.get(defaultSessionCount)
     }

@@ -6,10 +6,10 @@ import com.g2pdev.smartrate.cache.SessionCountCache
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
 import com.g2pdev.smartrate.interactor.last_prompt.SetLastPromptSessionToCurrent
 import com.g2pdev.smartrate.interactor.never_ask.SetNeverAsk
+import javax.inject.Inject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 internal class ShouldShowRatingInteractorTest : BaseTest() {

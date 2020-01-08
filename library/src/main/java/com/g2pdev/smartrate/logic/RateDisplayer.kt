@@ -23,9 +23,9 @@ import com.g2pdev.smartrate.logic.model.config.getRateConfig
 import com.g2pdev.smartrate.ui.feedback.FeedbackDialogFragment
 import com.g2pdev.smartrate.ui.rate.RateDialogFragment
 import io.reactivex.Single
-import timber.log.Timber
 import java.lang.ref.WeakReference
 import javax.inject.Inject
+import timber.log.Timber
 
 internal class RateDisplayer {
     // Ignoring disposables is OK here, because it could be interrupted only if app dies,
@@ -255,5 +255,4 @@ internal class RateDisplayer {
     private companion object {
         private const val demoAppPackageName = "com.g2pdev.smartrate.demo"
     }
-
 }

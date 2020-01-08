@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+apply from: "$project.rootDir/tools/spotless.gradle"
+
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
