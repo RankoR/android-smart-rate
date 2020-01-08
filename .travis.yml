@@ -19,7 +19,7 @@ android:
     - android-$ANDROID_API
     - extra-google-m2repository
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-$EMULATOR_API
+    - sys-img-armeabi-v7a-android-21
 
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a -c 100M
