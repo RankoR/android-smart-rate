@@ -11,9 +11,9 @@ import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetween
 import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPrompts
 import com.g2pdev.smartrate.demo.util.schedulersSingleToMain
 import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
+import javax.inject.Inject
 import moxy.InjectViewState
 import timber.log.Timber
-import javax.inject.Inject
 
 @InjectViewState
 class MainPresenter : BasePresenter<MainView>() {

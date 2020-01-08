@@ -5,6 +5,9 @@ import com.g2pdev.smartrate.demo.ui.MainPresenter
 import dagger.Component
 import javax.inject.Singleton
 
+/**
+ * Main Dagger component
+ */
 @Component(
     modules = [
         AppModule::class
@@ -16,5 +19,4 @@ interface AppComponent {
     fun inject(app: App)
 
     fun inject(presenter: MainPresenter)
-
 }

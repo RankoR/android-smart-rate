@@ -6,8 +6,8 @@ import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.demo.di.DiHolder
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCount
 import com.g2pdev.smartrate.demo.util.schedulersSingleToMain
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 class App : Application() {
 

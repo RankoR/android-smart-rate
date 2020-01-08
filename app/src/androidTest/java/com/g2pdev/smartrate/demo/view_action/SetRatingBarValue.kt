@@ -7,7 +7,6 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import org.hamcrest.Matcher
 
-
 /**
  * Warning: On Android 10+ you must enable hidden methods calls:
  * adb shell settings put global hidden_api_policy  1

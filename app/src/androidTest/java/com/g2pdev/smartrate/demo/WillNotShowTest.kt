@@ -5,6 +5,9 @@ import androidx.test.filters.LargeTest
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Test scenarios when the dialog will not be shown
+ */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class WillNotShowTest : BaseUiTest() {
@@ -60,5 +63,4 @@ class WillNotShowTest : BaseUiTest() {
             R.string.title_rate_dialog_will_not_show
         )
     }
-
 }

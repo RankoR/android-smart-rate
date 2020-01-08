@@ -16,5 +16,4 @@ class ShowRateDialogTest : BaseUiTest() {
         showDialog()
         assertRateDialogDisplayed()
     }
-
 }

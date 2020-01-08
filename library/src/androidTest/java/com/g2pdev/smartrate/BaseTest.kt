@@ -13,5 +13,4 @@ internal abstract class BaseTest {
             .testRateModule(TestRateModule(InstrumentationRegistry.getInstrumentation().targetContext))
             .build()
     }
-
 }

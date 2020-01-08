@@ -12,10 +12,10 @@ buildscript {
         min_sdk_version = 21
         target_sdk_version = 29
 
-        app_version_code = 6
-        app_version_name = '1.0.0-alpha10'
+        app_version_code = 7
+        app_version_name = '1.0.0-alpha11'
 
-        smart_rate_version = '1.0.0-alpha10'
+        smart_rate_version = '1.0.0-alpha11'
     }
 
     repositories {
@@ -27,6 +27,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:4.0.0-alpha07"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.27.0'
     }
 }
 
@@ -36,8 +37,4 @@ allprojects {
         jcenter()
 
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

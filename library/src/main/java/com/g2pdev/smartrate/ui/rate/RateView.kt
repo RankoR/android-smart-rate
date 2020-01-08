@@ -13,5 +13,4 @@ interface RateView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun close()
-
 }

@@ -6,7 +6,14 @@ import com.g2pdev.smartrate.cache.IsRatedCache
 import com.g2pdev.smartrate.cache.LastPromptSessionCache
 import com.g2pdev.smartrate.cache.NeverAskCache
 import com.g2pdev.smartrate.cache.SessionCountCache
-import com.g2pdev.smartrate.interactor.*
+import com.g2pdev.smartrate.interactor.ClearAll
+import com.g2pdev.smartrate.interactor.ClearAllImpl
+import com.g2pdev.smartrate.interactor.GetAppIcon
+import com.g2pdev.smartrate.interactor.GetAppIconImpl
+import com.g2pdev.smartrate.interactor.GetPackageName
+import com.g2pdev.smartrate.interactor.GetPackageNameImpl
+import com.g2pdev.smartrate.interactor.ShouldShowRating
+import com.g2pdev.smartrate.interactor.ShouldShowRatingImpl
 import com.g2pdev.smartrate.interactor.is_rated.IsRated
 import com.g2pdev.smartrate.interactor.is_rated.IsRatedImpl
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
@@ -181,5 +188,4 @@ internal open class RateModule(
     fun provideClearAll(
         rateRepository: RateRepository
     ): ClearAll = ClearAllImpl(rateRepository)
-
 }
