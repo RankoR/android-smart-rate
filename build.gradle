@@ -12,10 +12,10 @@ buildscript {
         min_sdk_version = 21
         target_sdk_version = 29
 
-        app_version_code = 7
-        app_version_name = '1.0.0-alpha11'
+        app_version_code = 8
+        app_version_name = '1.0.0-alpha12'
 
-        smart_rate_version = '1.0.0-alpha11'
+        smart_rate_version = '1.0.0-alpha12'
     }
 
     repositories {
