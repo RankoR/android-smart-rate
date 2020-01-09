@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0-alpha12] - 2020-01-09
+
+### Added
+
+- Publish library to JCenter
+- Remove fallback app icon — library size reduced to 217 KB
+
+### Fixed
+
+- Fixed R8 config — do not obfuscate function parameter names
+
 ## [1.0.0-alpha08] - 2020-01-08
 
 ### Added
