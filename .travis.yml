@@ -46,7 +46,7 @@ script:
 
 deploy:
   - provider: script
-    script: "./gradlew :library:clean :library:assembleRelease :library:install :library:bintrayUpload"
+    script: "./gradlew :library:clean :library:assembleRelease :library:bintrayUpload"
     skip_cleanup: true
     on:
       tags: true

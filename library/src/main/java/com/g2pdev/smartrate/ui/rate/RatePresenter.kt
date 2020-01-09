@@ -19,14 +19,18 @@ internal class RatePresenter : BasePresenter<RateView>() {
         SmartRate.plusRateComponent().inject(this)
     }
 
-    fun loadAppIcon(overrideIcon: Drawable?) {
+    fun loadAppIcon(overrideIcon: Drawable?, fallbackIcon: Drawable?) {
         overrideIcon
             ?.let(viewState::showAppIcon)
             ?: run {
                 getAppIcon
                     .exec()
                     .schedulersIoToMain()
-                    .subscribe(viewState::showAppIcon, Timber::e)
+                    .subscribe(viewState::showAppIcon) {
+                        Timber.e(it)
+
+                        fallbackIcon?.let(viewState::showAppIcon)
+                    }
                     .disposeOnDestroy()
             }
     }

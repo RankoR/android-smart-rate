@@ -40,16 +40,19 @@ internal class RateDialogFragment : BaseBottomDialogFragment(), RateView {
             ?.getParcelable<RateConfig>(argConfig)
             ?.let { config ->
 
-                val overrideIconDrawable = config.iconDrawableResId?.let { context?.getDrawableCompat(it) }
+                val fallbackIconDrawable = context?.getDrawableCompat(R.drawable.star)
+                val overrideIconDrawable =
+                    config.iconDrawableResId?.let { context?.getDrawableCompat(it) }
 
-                presenter.loadAppIcon(overrideIconDrawable)
+                presenter.loadAppIcon(overrideIconDrawable, fallbackIconDrawable)
 
                 titleTv.setText(config.titleResId)
                 neverBtn.setText(config.neverAskResId)
                 laterBtn.setText(config.laterResId)
 
                 context?.getColorCompat(config.titleTextColorResId)?.let(titleTv::setTextColor)
-                context?.getColorCompat(config.neverAskButtonTextColorResId)?.let(neverBtn::setTextColor)
+                context?.getColorCompat(config.neverAskButtonTextColorResId)
+                    ?.let(neverBtn::setTextColor)
                 config.laterButtonTextColorResId?.let {
                     context?.getColorCompat(it)?.let(laterBtn::setTextColor)
                 }
