@@ -28,7 +28,7 @@ See demo app on Google Play
 - Prompts for rating later after given amount of sessions (if user clicked «Later»)
 - Customizable texts (all!). Two default translations provided — English and Russian.
 - Customizable text and buttons colors
-- Size is about ~217 KB
+- Size is about ~290 KB
 
 ## Limitations
 
@@ -36,6 +36,12 @@ See demo app on Google Play
 - App must use [Material Components](https://material.io/develop/android/docs/getting-started/) theme
 
 ## Installation
+
+Add repository to your `repositories` section of project or module:
+
+```groovy
+maven { url 'https://dl.bintray.com/rankor/maven/' }
+```
 
 Add dependency to your module's `build.gradle` and sync:
 
