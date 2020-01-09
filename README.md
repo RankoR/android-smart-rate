@@ -37,6 +37,12 @@ See demo app on Google Play
 
 ## Installation
 
+Add repository to your `repositories` section of project or module:
+
+```groovy
+maven { url 'https://dl.bintray.com/rankor/maven/' }
+```
+
 Add dependency to your module's `build.gradle` and sync:
 
 ```groovy
@@ -65,7 +71,7 @@ class App : Application() {
 }
 
 ```
- 
+
 **Note:** calling `SmartRate.init()` with context other than `Application` will cause exception.
 
 ### Show dialog
@@ -170,11 +176,9 @@ Not needed — rules are included in library.
 
 ## TODO
 
-- Check for minimum text length in the feedback dialog
-- UI Tests
+- Upload library to jcenter
 - Test Xiaomi app store
 - Add Aptoide
-- Refactor config internals?
 
 ## Internals
 
@@ -197,13 +201,19 @@ All interactors, repository and some caches are covered by tests (see [tests](li
 
 UI is also almost fully covered by tests with Espresso (see [tests](app/src/androidTest/java/com/g2pdev/smartrate/demo/))
 
+### Code style
+
+Code style is automatically checked by Spotless and ktlint. Check out my post about it on [Medium](https://medium.com/@int_32/android-project-code-style-using-spotless-and-ktlint-5422fd90976c).
+
+
 ### CI/CD
 
 Every pull request to `master` is checked by Travis CI.
 
-When pull request to `master` is merged, Travis CI:
+When pull request to `master` is merged and some tag is pushed, Travis CI:
 - Builds library and uploads it to Bintray
 - Builds APK, signs it and uploads to Google Play using Fastlane Supply
+- Builds APK and uploads it to Github Releases
 
 ## Contributions
 
