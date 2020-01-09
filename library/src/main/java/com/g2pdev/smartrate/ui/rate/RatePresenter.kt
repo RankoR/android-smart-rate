@@ -5,9 +5,9 @@ import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.extension.schedulersIoToMain
 import com.g2pdev.smartrate.interactor.GetAppIcon
 import com.g2pdev.smartrate.ui.base.BasePresenter
-import javax.inject.Inject
 import moxy.InjectViewState
 import timber.log.Timber
+import javax.inject.Inject
 
 @InjectViewState
 internal class RatePresenter : BasePresenter<RateView>() {
@@ -19,18 +19,14 @@ internal class RatePresenter : BasePresenter<RateView>() {
         SmartRate.plusRateComponent().inject(this)
     }
 
-    fun loadAppIcon(overrideIcon: Drawable?, fallbackIcon: Drawable?) {
+    fun loadAppIcon(overrideIcon: Drawable?) {
         overrideIcon
             ?.let(viewState::showAppIcon)
             ?: run {
                 getAppIcon
                     .exec()
                     .schedulersIoToMain()
-                    .subscribe(viewState::showAppIcon) {
-                        Timber.e(it)
-
-                        fallbackIcon?.let(viewState::showAppIcon)
-                    }
+                    .subscribe(viewState::showAppIcon, Timber::e)
                     .disposeOnDestroy()
             }
     }
