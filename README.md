@@ -170,7 +170,6 @@ Not needed — rules are included in library.
 
 ## TODO
 
-- Upload library to jcenter
 - Test Xiaomi app store
 - Add Aptoide
 

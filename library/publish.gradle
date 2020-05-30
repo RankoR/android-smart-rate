@@ -46,6 +46,9 @@ tasks.withType(Javadoc).all {
     enabled = false
 }
 
+group = libraryGroupId
+version = smart_rate_version
+
 install {
     repositories.mavenInstaller {
         pom.project {
