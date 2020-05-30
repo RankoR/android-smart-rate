@@ -18,3 +18,6 @@
 -keepclassmembers,allowobfuscation class * {
   @com.google.gson.annotations.SerializedName <fields>;
 }
+
+# Remove after upgrading to Moxy 2.1.2+
+-keepnames class * extends moxy.MvpPresenter
