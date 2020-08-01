@@ -6,9 +6,9 @@ if: branch = master OR tag IS present
 
 env:
   global:
-    - ANDROID_API=29
+    - ANDROID_API=30
     - EMULATOR_API=21
-    - ANDROID_BUILD_TOOLS=29.0.3
+    - ANDROID_BUILD_TOOLS=30.0.1
     - RELEASE_APK_DIR=app/build/outputs/apk/release
 
 before_cache:
@@ -40,6 +40,7 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
+  - "./gradlew spotlessCheck"
   - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
   - "./gradlew :app:clean :app:build :app:connectedCheck -PdisablePreDex --stacktrace"
 
