@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.1] 2020-08-01
+
+- Add Huawei AppGallery support
+- Update libraries
+
 ## [1.0.0-alpha12] - 2020-01-09
 
 ### Added

@@ -16,7 +16,8 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
             Store.AMAZON -> getAmazonLink(packageName)
             Store.XIAOMI -> getXiaomiLink(packageName)
             Store.SAMSUNG -> getSamsungLink(packageName)
-//            Store.APTOIDE -> getAptoideLink(packageName)
+            Store.APP_GALLERY -> getAppGalleryLink(packageName)
+            //            Store.APTOIDE -> getAptoideLink(packageName) // TODO
         }
     }
 
@@ -60,7 +61,16 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
         return Single.just(
             StoreLink(
                 link = samsungLinkFormat.format(packageName),
-                alternateLink = xiaomiAlternateLinkFormat.format(packageName)
+                alternateLink = samsungAlternateLinkFormat.format(packageName)
+            )
+        )
+    }
+
+    private fun getAppGalleryLink(packageName: String): Single<StoreLink> {
+        return Single.just(
+            StoreLink(
+                link = appGalleryLinkFormat.format(packageName),
+                alternateLink = appGalleryAlternateLinkFormat
             )
         )
     }
@@ -81,5 +91,8 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
 
         private const val samsungLinkFormat = "https://galaxystore.samsung.com/detail/%s"
         private const val samsungAlternateLinkFormat = "https://galaxystore.samsung.com/detail/%s"
+
+        private const val appGalleryLinkFormat = "appmarket://details?id=%s"
+        private const val appGalleryAlternateLinkFormat = "https://appgallery8.huawei.com/"
     }
 }
