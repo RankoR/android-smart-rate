@@ -40,7 +40,6 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - "./gradlew spotlessCheck"
   - "./gradlew :library:clean :library:build :library:connectedCheck -PdisablePreDex --stacktrace"
   - "./gradlew :app:clean :app:build :app:connectedCheck -PdisablePreDex --stacktrace"
 
