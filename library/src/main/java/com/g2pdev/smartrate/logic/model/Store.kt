@@ -6,5 +6,6 @@ enum class Store {
     AMAZON,
     XIAOMI,
     SAMSUNG,
+    APP_GALLERY
 //    APTOIDE // TODO: Don't know how to link with package name
 }
