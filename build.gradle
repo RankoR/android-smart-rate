@@ -6,11 +6,11 @@ buildscript {
         rxjava_version = '2.2.19'
         moxyVersion = '2.0.2'
 
-        compile_sdk_version = 30
-        build_tools_version = '30.0.1'
+        compile_sdk_version = 29
+        build_tools_version = '29.0.3'
 
         min_sdk_version = 21
-        target_sdk_version = 30
+        target_sdk_version = 29
 
         app_version_code = 9
         app_version_name = '1.0.1'
