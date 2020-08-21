@@ -16,13 +16,14 @@ See demo app on Google Play
 
 - Auto-fetch app icon to display it in the dialog
 - Appears after the specified session count
-- Redirects to app store (see below), if the given rating is greater then minimal value, specified by you
-- Shows feedback form (with callback to your code), if rating is below then specified
+- Redirects to the app store (see below), if the given rating is greater then minimal value, specified by you
+- Shows the feedback form (with callback to your code), if rating is below then specified
 - Supports multiple app stores:
   - Google Play
   - Amazon
   - Xiaomi (currently link is duplicate of Google Play)
   - Samsung
+  - Huawei App Gallery
   - Aptoide (temporary disabled)
   - Custom link
 - Prompts for rating later after given amount of sessions (if user clicked «Later»)
@@ -37,7 +38,7 @@ See demo app on Google Play
 
 ## Installation
 
-Add dependency to your module's `build.gradle` and sync:
+Add dependency to your module's (usually `app/build.gradle`) `build.gradle` and sync:
 
 ```groovy
 implementation 'com.g2pdev:smartrate:(insert latest version)'
@@ -45,7 +46,7 @@ implementation 'com.g2pdev:smartrate:(insert latest version)'
 
 ## Set up
 
-### Initialize library
+### Initialize the library
 
 In your `Application.onCreate()` method call:
 

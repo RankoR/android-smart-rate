@@ -55,7 +55,7 @@ internal class GetStoreLinkInteractorTest : BaseTest() {
             .test()
             .assertValue(
                 StoreLink(
-                    link = "market://details?id=$packageName",
+                    link = "mimarket://details?id=$packageName",
                     alternateLink = "https://play.google.com/store/apps/details?id=$packageName"
                 )
             )
