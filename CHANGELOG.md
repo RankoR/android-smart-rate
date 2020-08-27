@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3] 2020-08-27
+
+- Rollback Kotlin version
+
 ## [1.0.2] 2020-08-21
 
 - Fix Xiaomi Store link
