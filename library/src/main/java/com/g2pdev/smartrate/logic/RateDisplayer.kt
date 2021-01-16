@@ -56,7 +56,10 @@ internal class RateDisplayer {
     lateinit var clearAll: ClearAll
 
     init {
-        SmartRate.plusRateComponent().inject(this)
+        if (SmartRate.instance == null) {
+            throw IllegalStateException("Not initialized")
+        }
+        SmartRate.instance!!.plusRateComponent().inject(this)
 
         incrementSessionCount()
     }

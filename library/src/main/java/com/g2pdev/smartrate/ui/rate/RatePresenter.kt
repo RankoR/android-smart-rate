@@ -16,7 +16,10 @@ internal class RatePresenter : BasePresenter<RateView>() {
     lateinit var getAppIcon: GetAppIcon
 
     init {
-        SmartRate.plusRateComponent().inject(this)
+        if (SmartRate.instance == null) {
+            throw IllegalStateException("Not initialized")
+        }
+        SmartRate.instance!!.plusRateComponent().inject(this)
     }
 
     fun loadAppIcon(overrideIcon: Drawable?) {

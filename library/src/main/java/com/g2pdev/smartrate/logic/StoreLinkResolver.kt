@@ -16,7 +16,7 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
             Store.AMAZON -> getAmazonLink(packageName)
             Store.XIAOMI -> getXiaomiLink(packageName)
             Store.SAMSUNG -> getSamsungLink(packageName)
-            Store.APP_GALLERY -> getAppGalleryLink(packageName)
+            Store.APP_GALLERY -> getAppGalleryLink(packageName, store.appID)
             //            Store.APTOIDE -> getAptoideLink(packageName) // TODO
         }
     }
@@ -66,11 +66,13 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
         )
     }
 
-    private fun getAppGalleryLink(packageName: String): Single<StoreLink> {
+    private fun getAppGalleryLink(packageName: String, appID: String): Single<StoreLink> {
         return Single.just(
             StoreLink(
                 link = appGalleryLinkFormat.format(packageName),
-                alternateLink = appGalleryAlternateLinkFormat
+                alternateLink = appGalleryAlternateLinkFormat.takeIf {
+                    appID.isBlank()
+                } ?: appGalleryAlternateLink2Format.format(appID)
             )
         )
     }
@@ -90,5 +92,6 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
 
         private const val appGalleryLinkFormat = "appmarket://details?id=%s"
         private const val appGalleryAlternateLinkFormat = "https://appgallery8.huawei.com/"
+        private const val appGalleryAlternateLink2Format = "https://appgallery.cloud.huawei.com/marketshare/app/C%s"
     }
 }

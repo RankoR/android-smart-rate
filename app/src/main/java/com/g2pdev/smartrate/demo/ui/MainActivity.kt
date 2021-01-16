@@ -1,22 +1,34 @@
 package com.g2pdev.smartrate.demo.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.BaseContextWrappingDelegate
+import androidx.appcompat.app.OnAttachBaseContext
 import androidx.core.text.isDigitsOnly
 import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.demo.R
+import com.g2pdev.smartrate.demo.util.LocaleHelper.onAttach
+import com.g2pdev.smartrate.demo.util.LocaleHelper.onAttachConfiguration
 import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
+import com.jakewharton.rxbinding3.widget.afterTextChangeEvents
+import com.jakewharton.rxbinding3.widget.checkedChanges
+import com.jakewharton.rxbinding3.widget.itemSelections
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+
+class MainActivity : MvpAppCompatActivity(), MainView, OnAttachBaseContext {
 
     @InjectPresenter
     internal lateinit var presenter: MainPresenter
@@ -43,20 +55,25 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         sessionCountEt
             .textChanges()
             .skipInitialValue()
-            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
             .map { it.toString() }
-            .filter { it.isDigitsOnly() }
-            .map { it.toInt() }
+            .filter { it.isDigitsOnly() && it.isNotBlank() }
+            .skip(1)
+            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+            .map {
+                try {it.toInt()} catch (ex: Throwable) { 3 }
+            }
             .subscribe(presenter::setSessionCount, Timber::e)
             .disposeOnDestroy()
 
         sessionCountBetweenPromptsEt
             .textChanges()
-            .skipInitialValue()
-            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
             .map { it.toString() }
-            .filter { it.isDigitsOnly() }
-            .map { it.toInt() }
+            .filter { it.isDigitsOnly() && it.isNotBlank() }
+            .skip(1)
+            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+            .map {
+                try {it.toInt()} catch (ex: Throwable) { 3 }
+            }
             .subscribe(presenter::setSessionCountBetweenPrompts, Timber::e)
             .disposeOnDestroy()
 
@@ -71,6 +88,44 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         resetLibraryCountersBtn.setOnClickListener {
             presenter.clearLibraryCounters()
         }
+
+        val localesArray = resources.getStringArray(R.array.locales_system)
+        localeSelect.setSelection(localesArray.indexOf(presenter.getLocale.exec().blockingGet()))
+        localeSelect
+            .itemSelections()
+                // skip default initial & select programmatically
+            .skip(2)
+                // prevent double calls
+            .debounce(inputDebounce, TimeUnit.MILLISECONDS)
+            .map { localesArray[it] }
+            .subscribe(presenter::setLanguage, Timber::e)
+            .disposeOnDestroy()
+
+        darkModeSwitch.isChecked = presenter.getDarkMode()
+        darkModeSwitch
+            .checkedChanges()
+            .subscribe(presenter::setDarkMode, Timber::e)
+            .disposeOnDestroy()
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(onAttach(base))
+    }
+
+    override fun createConfigurationContext(overrideConfiguration: Configuration): Context {
+        return onAttachConfiguration(overrideConfiguration, this)
+    }
+    override fun onAttachBaseContext(context: Context): Context {
+        return onAttach(context)
+    }
+
+    private var baseContextWrappingDelegate: AppCompatDelegate? = null
+
+    override fun getDelegate() = baseContextWrappingDelegate ?: BaseContextWrappingDelegate(
+        super.getDelegate(),
+        this
+    ).apply {
+        baseContextWrappingDelegate = this
     }
 
     override fun showSessionCount(sessionCount: Int) {
@@ -85,6 +140,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fakeSessionCountTv.text = getString(R.string.format_fake_session_count, sessionCount)
     }
 
+    // workaround for many toasts one after another on restore state
+    // uncomment to not save state but show toasts
+    /*@SuppressLint("MissingSuperCall")
+    override fun onSaveInstanceState(outState: Bundle) {
+    }*/
+
     @SuppressLint("SetTextI18n")
     private fun addLogEntry(text: String) {
         logsTv.text = logsTv.text.toString() + "\n" + text
@@ -92,7 +153,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private fun showLogMessage(text: String) {
         addLogEntry(text)
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+        // workaround for many toasts one after another on restore state
+        // uncomment to not save state but show toasts
+        //Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun showCountersCleared() {

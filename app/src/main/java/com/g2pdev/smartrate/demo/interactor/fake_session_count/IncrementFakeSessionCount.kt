@@ -20,7 +20,7 @@ internal class IncrementFakeSessionCountImpl(
             .flatMapCompletable(settingsRepository::setFakeSessionCount)
             .doOnComplete {
                 @Suppress("DEPRECATION")
-                SmartRate.testIncrementSessionCount()
+                SmartRate.instance?.testIncrementSessionCount()
             }
     }
 }
