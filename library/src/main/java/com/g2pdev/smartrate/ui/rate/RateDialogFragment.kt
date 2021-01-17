@@ -1,10 +1,15 @@
 package com.g2pdev.smartrate.ui.rate
 
+import android.content.Context
+import android.graphics.Point
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import com.g2pdev.smartrate.R
 import com.g2pdev.smartrate.extension.getColorCompat

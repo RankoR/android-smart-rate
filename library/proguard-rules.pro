@@ -1,11 +1,10 @@
--dontobfuscate
-
 -keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes MethodParameters
 -dontwarn sun.misc.**
 
 -dontwarn java.util.concurrent.Flow*
+-dontwarn module-info
 
 -keep class com.g2pdev.smartrate.** { *; }
 -keepnames class com.g2pdev.smartrate.** { *; }

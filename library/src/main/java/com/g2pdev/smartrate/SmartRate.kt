@@ -10,7 +10,28 @@ import com.g2pdev.smartrate.logic.RateDisplayer
 import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import timber.log.Timber
 
-object SmartRate {
+class SmartRate {
+
+    companion object {
+        @JvmStatic
+        public var instance: SmartRate? = null
+        @JvmStatic
+        fun init(context: Application) {
+            instance = SmartRate()
+            instance!!.initReal(context)
+        }
+        @JvmStatic
+        /**
+         * Smart show rate dialog.
+         * Dialog will be shown only if all specified in config conditions match
+         *
+         * @param activity Activity to show dialog with
+         * @param config Config, optional. If not specified, will be used default one
+         */
+        fun show(activity: FragmentActivity, config: SmartRateConfig = SmartRateConfig()) {
+            instance?.rateDisplayer?.show(activity, config)
+        }
+    }
 
     private lateinit var rateComponent: RateComponent
 
@@ -20,11 +41,7 @@ object SmartRate {
      * Initialize library. Call only once in [Application.onCreate].
      * @param context Application context. Other contexts will lead to crash
      */
-    fun init(context: Context) {
-        if (context !is Application) {
-            throw IllegalArgumentException("Context must be application context")
-        }
-
+    private fun initReal(context: Application) {
         initDagger(context)
         initLogging()
         initRateDisplayer()
@@ -64,17 +81,6 @@ object SmartRate {
      */
     fun clearAll(callback: (() -> Unit)? = null) {
         rateDisplayer.clearAll(callback)
-    }
-
-    /**
-     * Smart show rate dialog.
-     * Dialog will be shown only if all specified in config conditions match
-     *
-     * @param activity Activity to show dialog with
-     * @param config Config, optional. If not specified, will be used default one
-     */
-    fun show(activity: FragmentActivity, config: SmartRateConfig = SmartRateConfig()) {
-        rateDisplayer.show(activity, config)
     }
 
     /**

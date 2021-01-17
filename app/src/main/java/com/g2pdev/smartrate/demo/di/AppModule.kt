@@ -1,6 +1,7 @@
 package com.g2pdev.smartrate.demo.di
 
 import android.content.Context
+import com.g2pdev.smartrate.demo.cache.DarkModeCache
 import com.g2pdev.smartrate.demo.cache.FakeSessionCountCache
 import com.g2pdev.smartrate.demo.cache.SessionCountBetweenPromptsCache
 import com.g2pdev.smartrate.demo.cache.SessionCountCache
@@ -8,12 +9,20 @@ import com.g2pdev.smartrate.demo.interactor.GetSessionCount
 import com.g2pdev.smartrate.demo.interactor.GetSessionCountImpl
 import com.g2pdev.smartrate.demo.interactor.SetSessionCount
 import com.g2pdev.smartrate.demo.interactor.SetSessionCountImpl
+import com.g2pdev.smartrate.demo.interactor.dark_mode.GetDarkMode
+import com.g2pdev.smartrate.demo.interactor.dark_mode.GetDarkModeImpl
+import com.g2pdev.smartrate.demo.interactor.dark_mode.SetDarkMode
+import com.g2pdev.smartrate.demo.interactor.dark_mode.SetDarkModeImpl
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCount
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCountImpl
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCount
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCountImpl
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCount
 import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCountImpl
+import com.g2pdev.smartrate.demo.interactor.language.GetLocale
+import com.g2pdev.smartrate.demo.interactor.language.GetLocaleImpl
+import com.g2pdev.smartrate.demo.interactor.language.SetLocale
+import com.g2pdev.smartrate.demo.interactor.language.SetLocaleImpl
 import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPrompts
 import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPromptsImpl
 import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPrompts
@@ -68,12 +77,15 @@ class AppModule(
     fun provideSettingsRepository(
         sessionCountCache: SessionCountCache,
         sessionCountBetweenPromptsCache: SessionCountBetweenPromptsCache,
-        fakeSessionCountCache: FakeSessionCountCache
+        fakeSessionCountCache: FakeSessionCountCache,
+        darkModeCache: DarkModeCache
     ): SettingsRepository =
         SettingsRepositoryImpl(
             sessionCountCache,
             sessionCountBetweenPromptsCache,
-            fakeSessionCountCache
+            fakeSessionCountCache,
+            darkModeCache,
+            context
         )
 
     @Provides
@@ -119,4 +131,35 @@ class AppModule(
     fun provideClearFakeSessionCount(
         settingsRepository: SettingsRepository
     ): ClearFakeSessionCount = ClearFakeSessionCountImpl(settingsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetLocale(
+        settingsRepository: SettingsRepository
+    ): GetLocale = GetLocaleImpl(settingsRepository)
+
+    @Provides
+    @Singleton
+    fun provideSetLocale(
+        settingsRepository: SettingsRepository
+    ): SetLocale = SetLocaleImpl(settingsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetDarkMode(
+        settingsRepository: SettingsRepository
+    ): GetDarkMode = GetDarkModeImpl(settingsRepository)
+
+    @Provides
+    @Singleton
+    fun provideSetDarkMode(
+        settingsRepository: SettingsRepository
+    ): SetDarkMode = SetDarkModeImpl(settingsRepository)
+
+    @Provides
+    @Singleton
+    fun provideDarkModeCache(
+        gson: Gson,
+        context: Context
+    ): DarkModeCache = DarkModeCache(gson, context)
 }

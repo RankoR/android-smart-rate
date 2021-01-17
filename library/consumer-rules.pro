@@ -1,5 +1,3 @@
--dontobfuscate
-
 -keepattributes MethodParameters
 -keepattributes Signature
 
@@ -7,3 +5,4 @@
 -keepnames class com.g2pdev.smartrate.** { *; }
 
 -dontwarn java.util.concurrent.Flow*
+-dontwarn module-info
