@@ -1,6 +1,7 @@
 # Smart Rate
 
-[![Build Status](https://travis-ci.com/RankoR/android-smart-rate.svg?branch=master)](https://travis-ci.com/RankoR/android-smart-rate) [ ![Download](https://api.bintray.com/packages/rankor/maven/android-smart-rate/images/download.svg) ](https://bintray.com/rankor/maven/android-smart-rate/_latestVersion)
+[![Build Status](https://travis-ci.com/RankoR/android-smart-rate.svg?branch=master)](https://travis-ci.com/RankoR/android-smart-rate)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/pro.labster/smartrate/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pro.labster/smartrate)
 
 [Smart rate](https://github.com/RankoR/android-smart-rate) is a library that helps you improve your app's rating and get user feedback, inspired by [Smart App Rate](https://github.com/codemybrainsout/smart-app-rate) library.
 
@@ -24,7 +25,6 @@ See demo app on Google Play
   - Xiaomi (currently link is duplicate of Google Play)
   - Samsung
   - Huawei App Gallery
-  - Aptoide (temporary disabled)
   - Custom link
 - Prompts for rating later after given amount of sessions (if user clicked «Later»)
 - Customizable texts (all!). Two default translations provided — English and Russian.
@@ -98,10 +98,9 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        val config = SmartRateConfig()
-                        .apply {
-                            // ...
-                        }
+        val config = SmartRateConfig().apply {
+                            // ... 
+        }
         
         SmartRate.show(this, config)
     }
