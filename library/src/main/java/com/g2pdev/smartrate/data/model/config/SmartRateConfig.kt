@@ -8,11 +8,11 @@ import com.g2pdev.smartrate.data.model.Store
 
 data class SmartRateConfig(
 
-    var minSessionCount: Int = defaultMinSessionCount,
+    var minSessionCount: Int = DEFAULT_MIN_SESSION_COUNT,
 
-    var minSessionCountBetweenPrompts: Int = defaultMinSessionCountBetweenPrompts,
+    var minSessionCountBetweenPrompts: Int = DEFAULT_MIN_SESSION_COUNT_BETWEEN_PROMPTS,
 
-    var minRatingForStore: Float = defaultMinRatingForStore,
+    var minRatingForStore: Float = DEFAULT_MIN_RATING_FOR_STORE,
 
     @DrawableRes
     var iconDrawableResId: Int? = null,
@@ -78,7 +78,7 @@ data class SmartRateConfig(
 
     var isFeedbackDismissible: Boolean = false,
 
-    var minFeedbackLength: Int = defaultMinFeedbackLength,
+    var minFeedbackLength: Int = DEFAULT_MIN_FEEDBACK_RATE,
 
     var onFeedbackDismissListener: (() -> Unit)? = null,
 
@@ -88,9 +88,9 @@ data class SmartRateConfig(
 ) {
 
     companion object {
-        const val defaultMinSessionCount = 3
-        const val defaultMinSessionCountBetweenPrompts = 3
-        const val defaultMinRatingForStore = 4f
-        const val defaultMinFeedbackLength = 6
+        const val DEFAULT_MIN_SESSION_COUNT = 3
+        const val DEFAULT_MIN_SESSION_COUNT_BETWEEN_PROMPTS = 3
+        const val DEFAULT_MIN_RATING_FOR_STORE = 4f
+        const val DEFAULT_MIN_FEEDBACK_RATE = 6
     }
 }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.lifecycleScope
 import com.g2pdev.smartrate.SmartRate
+import com.g2pdev.smartrate.data.model.Store
 import com.g2pdev.smartrate.data.model.config.SmartRateConfig
 import com.g2pdev.smartrate.demo.R
 import com.g2pdev.smartrate.demo.databinding.ActivityMainBinding
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private var smartRateConfig = SmartRateConfig()
+    private var smartRateConfig = SmartRateConfig().apply {
+        store = Store.GOOGLE_PLAY_IN_APP_REVIEW
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,11 +12,11 @@ internal class StoreLinkResolverImpl : StoreLinkResolver {
     override fun getLink(store: Store, packageName: String): StoreLink {
         return when (store) {
             Store.GOOGLE_PLAY -> getGooglePlayLink(packageName)
+            Store.GOOGLE_PLAY_IN_APP_REVIEW -> getGooglePlayLink(packageName)
             Store.AMAZON -> getAmazonLink(packageName)
             Store.XIAOMI -> getXiaomiLink(packageName)
             Store.SAMSUNG -> getSamsungLink(packageName)
             Store.APP_GALLERY -> getAppGalleryLink(packageName)
-            //            Store.APTOIDE -> getAptoideLink(packageName) // TODO
         }
     }
 

@@ -3,6 +3,7 @@ package com.g2pdev.smartrate.demo.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.g2pdev.smartrate.SmartRate
+import com.g2pdev.smartrate.data.model.Store
 import com.g2pdev.smartrate.data.model.config.SmartRateConfig
 import com.g2pdev.smartrate.demo.di.DiHolder
 import com.g2pdev.smartrate.demo.domain.interactor.GetSessionCount
@@ -39,7 +40,9 @@ class MainViewModel : BaseViewModel() {
     @Inject
     internal lateinit var clearFakeSessionCount: ClearFakeSessionCount
 
-    private val smartRateConfig = SmartRateConfig()
+    private val smartRateConfig = SmartRateConfig().apply {
+        store = Store.GOOGLE_PLAY_IN_APP_REVIEW
+    }
 
     val config = MutableLiveData<SmartRateConfig>()
 
