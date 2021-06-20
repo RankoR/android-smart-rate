@@ -1,8 +1,9 @@
 package com.g2pdev.smartrate
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.g2pdev.smartrate.repository.RateRepository
+import com.g2pdev.smartrate.data.repository.RateRepository
 import javax.inject.Inject
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,79 +16,42 @@ internal class RateRepositoryTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testSessionCount() {
-        rateRepository
-            .getSessionCount()
-            .test()
-            .assertValue(0)
+        Assert.assertEquals(0, rateRepository.getSessionCount())
 
-        rateRepository
-            .setSessionCount(2)
-            .test()
-            .assertComplete()
+        rateRepository.setSessionCount(2)
 
-        rateRepository
-            .getSessionCount()
-            .test()
-            .assertValue(2)
+        Assert.assertEquals(2, rateRepository.getSessionCount())
     }
 
     @Test
     fun testIsRated() {
-        rateRepository
-            .isRated()
-            .test()
-            .assertValue(false)
+        Assert.assertFalse(rateRepository.isRated())
 
-        rateRepository
-            .setIsRated(true)
-            .test()
-            .assertComplete()
+        rateRepository.setIsRated(true)
 
-        rateRepository
-            .isRated()
-            .test()
-            .assertValue(true)
+        Assert.assertTrue(rateRepository.isRated())
     }
 
     @Test
     fun testIsNeverAsk() {
-        rateRepository
-            .isNeverAsk()
-            .test()
-            .assertValue(false)
+        Assert.assertFalse(rateRepository.isNeverAsk())
 
-        rateRepository
-            .setNeverAsk(true)
-            .test()
-            .assertComplete()
+        rateRepository.setNeverAsk(true)
 
-        rateRepository
-            .isNeverAsk()
-            .test()
-            .assertValue(true)
+        Assert.assertTrue(rateRepository.isNeverAsk())
     }
 
     @Test
     fun testLastPromptSession() {
-        rateRepository
-            .getLastPromptSession()
-            .test()
-            .assertValue(0)
+        Assert.assertEquals(0, rateRepository.getLastPromptSession())
 
-        rateRepository
-            .setLastPromptSession(10)
-            .test()
-            .assertComplete()
+        rateRepository.setLastPromptSession(10)
 
-        rateRepository
-            .getLastPromptSession()
-            .test()
-            .assertValue(10)
+        Assert.assertEquals(10, rateRepository.getLastPromptSession())
     }
 }

@@ -1,15 +1,15 @@
 package com.g2pdev.smartrate.di
 
-import com.g2pdev.smartrate.CachesTest
+import com.g2pdev.smartrate.PreferencesTest
 import com.g2pdev.smartrate.RateRepositoryTest
-import com.g2pdev.smartrate.interactor.ClearAllInteractorTest
-import com.g2pdev.smartrate.interactor.GetPackageNameInteractorTest
-import com.g2pdev.smartrate.interactor.GetStoreLinkInteractorTest
-import com.g2pdev.smartrate.interactor.IsRatedInteractorTest
-import com.g2pdev.smartrate.interactor.LastPromptInteractorTest
-import com.g2pdev.smartrate.interactor.NeverAskInteractorTest
-import com.g2pdev.smartrate.interactor.SessionCountInteractorTest
-import com.g2pdev.smartrate.interactor.ShouldShowRatingInteractorTest
+import com.g2pdev.smartrate.domain.interactor.ClearAllInteractorTest
+import com.g2pdev.smartrate.domain.interactor.GetPackageNameInteractorTest
+import com.g2pdev.smartrate.domain.interactor.GetStoreLinkInteractorTest
+import com.g2pdev.smartrate.domain.interactor.IsRatedInteractorTest
+import com.g2pdev.smartrate.domain.interactor.LastPromptInteractorTest
+import com.g2pdev.smartrate.domain.interactor.NeverAskInteractorTest
+import com.g2pdev.smartrate.domain.interactor.SessionCountInteractorTest
+import com.g2pdev.smartrate.domain.interactor.ShouldShowRatingInteractorTest
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,7 +21,7 @@ import javax.inject.Singleton
 @Singleton
 internal interface TestRateComponent {
 
-    fun inject(cachesTest: CachesTest)
+    fun inject(preferencesTest: PreferencesTest)
     fun inject(rateRepositoryTest: RateRepositoryTest)
 
     fun inject(isRatedInteractorTest: IsRatedInteractorTest)

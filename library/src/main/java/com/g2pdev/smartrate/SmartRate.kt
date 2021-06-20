@@ -3,11 +3,11 @@ package com.g2pdev.smartrate
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import com.g2pdev.smartrate.data.model.config.SmartRateConfig
 import com.g2pdev.smartrate.di.DaggerRateComponent
 import com.g2pdev.smartrate.di.RateComponent
 import com.g2pdev.smartrate.di.RateModule
-import com.g2pdev.smartrate.logic.RateDisplayer
-import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
+import com.g2pdev.smartrate.domain.RateDisplayer
 import timber.log.Timber
 
 object SmartRate {

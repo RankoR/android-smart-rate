@@ -1,7 +1,7 @@
 package com.g2pdev.smartrate.di
 
-import com.g2pdev.smartrate.logic.RateDisplayer
-import com.g2pdev.smartrate.ui.rate.RatePresenter
+import com.g2pdev.smartrate.domain.RateDisplayer
+import com.g2pdev.smartrate.presentation.rate.RateDialogFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,5 +15,5 @@ internal interface RateComponent {
 
     fun inject(rateDisplayer: RateDisplayer)
 
-    fun inject(presenter: RatePresenter)
+    fun inject(fragment: RateDialogFragment)
 }

@@ -1,27 +1,28 @@
 package com.g2pdev.smartrate.demo.di
 
 import android.content.Context
-import com.g2pdev.smartrate.demo.cache.FakeSessionCountCache
-import com.g2pdev.smartrate.demo.cache.SessionCountBetweenPromptsCache
-import com.g2pdev.smartrate.demo.cache.SessionCountCache
-import com.g2pdev.smartrate.demo.interactor.GetSessionCount
-import com.g2pdev.smartrate.demo.interactor.GetSessionCountImpl
-import com.g2pdev.smartrate.demo.interactor.SetSessionCount
-import com.g2pdev.smartrate.demo.interactor.SetSessionCountImpl
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCount
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCountImpl
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCount
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCountImpl
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCount
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCountImpl
-import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPrompts
-import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPromptsImpl
-import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPrompts
-import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPromptsImpl
-import com.g2pdev.smartrate.demo.repository.SettingsRepository
-import com.g2pdev.smartrate.demo.repository.SettingsRepositoryImpl
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.g2pdev.smartrate.demo.data.preference.FakeSessionCountPreference
+import com.g2pdev.smartrate.demo.data.preference.FakeSessionCountPreferenceImpl
+import com.g2pdev.smartrate.demo.data.preference.SessionCountBetweenPromptsPreference
+import com.g2pdev.smartrate.demo.data.preference.SessionCountBetweenPromptsPreferenceImpl
+import com.g2pdev.smartrate.demo.data.preference.SessionCountPreference
+import com.g2pdev.smartrate.demo.data.preference.SessionCountPreferenceImpl
+import com.g2pdev.smartrate.demo.data.repository.SettingsRepository
+import com.g2pdev.smartrate.demo.data.repository.SettingsRepositoryImpl
+import com.g2pdev.smartrate.demo.domain.interactor.GetSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.GetSessionCountImpl
+import com.g2pdev.smartrate.demo.domain.interactor.SetSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.SetSessionCountImpl
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.ClearFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.ClearFakeSessionCountImpl
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.GetFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.GetFakeSessionCountImpl
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.IncrementFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.IncrementFakeSessionCountImpl
+import com.g2pdev.smartrate.demo.domain.interactor.session_count.GetSessionCountBetweenPrompts
+import com.g2pdev.smartrate.demo.domain.interactor.session_count.GetSessionCountBetweenPromptsImpl
+import com.g2pdev.smartrate.demo.domain.interactor.session_count.SetSessionCountBetweenPrompts
+import com.g2pdev.smartrate.demo.domain.interactor.session_count.SetSessionCountBetweenPromptsImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -40,41 +41,33 @@ class AppModule(
 
     @Provides
     @Singleton
-    fun provideGson(): Gson = GsonBuilder().create()
-
-    @Provides
-    @Singleton
-    fun provideSessionCountCache(
-        gson: Gson,
+    fun provideSessionCountPreference(
         context: Context
-    ): SessionCountCache = SessionCountCache(gson, context)
+    ): SessionCountPreference = SessionCountPreferenceImpl(context)
 
     @Provides
     @Singleton
     fun provideFakeSessionCountCache(
-        gson: Gson,
         context: Context
-    ): FakeSessionCountCache = FakeSessionCountCache(gson, context)
+    ): FakeSessionCountPreference = FakeSessionCountPreferenceImpl(context)
 
     @Provides
     @Singleton
     fun provideSessionCountBetweenPromptsCache(
-        gson: Gson,
         context: Context
-    ): SessionCountBetweenPromptsCache = SessionCountBetweenPromptsCache(gson, context)
+    ): SessionCountBetweenPromptsPreference = SessionCountBetweenPromptsPreferenceImpl(context)
 
     @Provides
     @Singleton
     fun provideSettingsRepository(
-        sessionCountCache: SessionCountCache,
-        sessionCountBetweenPromptsCache: SessionCountBetweenPromptsCache,
-        fakeSessionCountCache: FakeSessionCountCache
-    ): SettingsRepository =
-        SettingsRepositoryImpl(
-            sessionCountCache,
-            sessionCountBetweenPromptsCache,
-            fakeSessionCountCache
-        )
+        sessionCountPreference: SessionCountPreference,
+        sessionCountBetweenPromptsPreference: SessionCountBetweenPromptsPreference,
+        fakeSessionCountPreference: FakeSessionCountPreference
+    ): SettingsRepository = SettingsRepositoryImpl(
+        sessionCountPreference,
+        sessionCountBetweenPromptsPreference,
+        fakeSessionCountPreference
+    )
 
     @Provides
     @Singleton
