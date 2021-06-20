@@ -1,6 +1,6 @@
-package com.g2pdev.smartrate.demo.interactor
+package com.g2pdev.smartrate.demo.domain.interactor
 
-import com.g2pdev.smartrate.demo.repository.SettingsRepository
+import com.g2pdev.smartrate.demo.data.repository.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

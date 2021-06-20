@@ -1,4 +1,4 @@
-package com.g2pdev.smartrate.demo.ui
+package com.g2pdev.smartrate.demo.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,9 +13,12 @@ import com.g2pdev.smartrate.demo.databinding.ActivityMainBinding
 import com.g2pdev.smartrate.extension.textChanges
 import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
-
 
 @FlowPreview
 class MainActivity : AppCompatActivity() {

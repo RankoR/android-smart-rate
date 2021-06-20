@@ -3,11 +3,11 @@ package com.g2pdev.smartrate.demo
 import android.app.Application
 import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.demo.di.DiHolder
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.IncrementFakeSessionCount
+import javax.inject.Inject
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 class App : Application() {
 

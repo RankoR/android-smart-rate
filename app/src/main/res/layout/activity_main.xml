@@ -7,7 +7,7 @@
     android:paddingStart="32dp"
     android:paddingTop="32dp"
     android:paddingEnd="32dp"
-    tools:context=".ui.MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

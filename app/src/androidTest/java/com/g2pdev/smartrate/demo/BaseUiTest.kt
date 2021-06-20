@@ -12,7 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
-import com.g2pdev.smartrate.demo.ui.MainActivity
+import com.g2pdev.smartrate.demo.presentation.MainActivity
 import com.g2pdev.smartrate.demo.util.getText
 import com.g2pdev.smartrate.demo.util.waitUntilDoesNotExist
 import com.g2pdev.smartrate.demo.util.waitUntilVisible

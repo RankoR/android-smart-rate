@@ -1,8 +1,8 @@
-package com.g2pdev.smartrate.demo.repository
+package com.g2pdev.smartrate.demo.data.repository
 
-import com.g2pdev.smartrate.demo.cache.FakeSessionCountPreference
-import com.g2pdev.smartrate.demo.cache.SessionCountBetweenPromptsPreference
-import com.g2pdev.smartrate.demo.cache.SessionCountPreference
+import com.g2pdev.smartrate.demo.data.preference.FakeSessionCountPreference
+import com.g2pdev.smartrate.demo.data.preference.SessionCountBetweenPromptsPreference
+import com.g2pdev.smartrate.demo.data.preference.SessionCountPreference
 
 /**
  * Stores and retrieves various parameters for app and library

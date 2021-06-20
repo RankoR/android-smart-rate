@@ -1,6 +1,6 @@
-package com.g2pdev.smartrate.demo.interactor.session_count
+package com.g2pdev.smartrate.demo.domain.interactor.session_count
 
-import com.g2pdev.smartrate.demo.repository.SettingsRepository
+import com.g2pdev.smartrate.demo.data.repository.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

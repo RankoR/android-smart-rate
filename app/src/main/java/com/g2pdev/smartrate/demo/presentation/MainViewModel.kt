@@ -1,20 +1,20 @@
-package com.g2pdev.smartrate.demo.ui
+package com.g2pdev.smartrate.demo.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.demo.di.DiHolder
-import com.g2pdev.smartrate.demo.interactor.GetSessionCount
-import com.g2pdev.smartrate.demo.interactor.SetSessionCount
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.ClearFakeSessionCount
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.GetFakeSessionCount
-import com.g2pdev.smartrate.demo.interactor.fake_session_count.IncrementFakeSessionCount
-import com.g2pdev.smartrate.demo.interactor.session_count.GetSessionCountBetweenPrompts
-import com.g2pdev.smartrate.demo.interactor.session_count.SetSessionCountBetweenPrompts
+import com.g2pdev.smartrate.demo.domain.interactor.GetSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.SetSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.ClearFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.GetFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.fake_session_count.IncrementFakeSessionCount
+import com.g2pdev.smartrate.demo.domain.interactor.session_count.GetSessionCountBetweenPrompts
+import com.g2pdev.smartrate.demo.domain.interactor.session_count.SetSessionCountBetweenPrompts
 import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import com.g2pdev.smartrate.ui.base.BaseViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class MainViewModel : BaseViewModel() {
 

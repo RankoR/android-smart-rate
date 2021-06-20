@@ -1,4 +1,4 @@
-package com.g2pdev.smartrate.demo.cache
+package com.g2pdev.smartrate.demo.data.preference
 
 import android.content.Context
 import pro.labster.typedpreferences.IntPreference

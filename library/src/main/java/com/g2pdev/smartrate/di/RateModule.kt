@@ -2,8 +2,22 @@ package com.g2pdev.smartrate.di
 
 import android.content.Context
 import android.content.pm.PackageManager
-import com.g2pdev.smartrate.cache.*
-import com.g2pdev.smartrate.interactor.*
+import com.g2pdev.smartrate.cache.IsRatedPreference
+import com.g2pdev.smartrate.cache.IsRatedPreferenceImpl
+import com.g2pdev.smartrate.cache.LastPromptSessionPreference
+import com.g2pdev.smartrate.cache.LastPromptSessionPreferenceImpl
+import com.g2pdev.smartrate.cache.NeverAskPreference
+import com.g2pdev.smartrate.cache.NeverAskPreferenceImpl
+import com.g2pdev.smartrate.cache.SessionCountPreference
+import com.g2pdev.smartrate.cache.SessionCountPreferenceImpl
+import com.g2pdev.smartrate.interactor.ClearAll
+import com.g2pdev.smartrate.interactor.ClearAllImpl
+import com.g2pdev.smartrate.interactor.GetAppIcon
+import com.g2pdev.smartrate.interactor.GetAppIconImpl
+import com.g2pdev.smartrate.interactor.GetPackageName
+import com.g2pdev.smartrate.interactor.GetPackageNameImpl
+import com.g2pdev.smartrate.interactor.ShouldShowRating
+import com.g2pdev.smartrate.interactor.ShouldShowRatingImpl
 import com.g2pdev.smartrate.interactor.is_rated.IsRated
 import com.g2pdev.smartrate.interactor.is_rated.IsRatedImpl
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
