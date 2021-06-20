@@ -19,4 +19,20 @@
     <string name="title_later_clicked" tools:ignore="MissingTranslation">«Later» clicked</string>
     <string name="title_feedback_cancel_clicked" tools:ignore="MissingTranslation">Feedback «cancel» clicked</string>
     <string name="format_feedback_submit_clicked" tools:ignore="MissingTranslation">Feedback: %1$s</string>
+    <string name="select_language" tools:ignore="MissingTranslation">Select Language:</string>
+    <string name="toggle_dark_mode" tools:ignore="MissingTranslation">Toggle Dark Mode</string>
+
+    <array name="locales_user_facing">
+        <item>English</item>
+        <item>Russian</item>
+        <item>Bulgarian</item>
+        <item>German</item>
+    </array>
+
+    <string-array name="locales_system">
+        <item>en</item>
+        <item>ru</item>
+        <item>bg</item>
+        <item>de</item>
+    </string-array>
 </resources>

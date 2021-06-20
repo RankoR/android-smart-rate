@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#212121</color>
+
+    <color name="nav_bar_color">#212121</color>
+
+    <color name="rateTitleText">#FAFAFA</color>
+    <color name="rateNeverButtonText">#E0E0E0</color>
+
+    <color name="feedbackTitleText">#FAFAFA</color>
+    <color name="feedbackCancelButtonText">#FAFAFA</color>
+
+    <color name="feedbackSubmitColorDisabled">#E0E0E0</color>
+
+    <bool name="lightNavBar">false</bool>
+</resources>

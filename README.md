@@ -138,6 +138,11 @@ Configuration is represented by class [`SmartRateConfig`](/library/src/main/java
 | `showFeedbackDialog` | `Boolean` | Show feedback dialog if rating is below then `minRatingForStore`?  | `true` |
 | `isFeedbackDismissible` | `Boolean` | Is feedback dialog dismissible by clicking «back» button or outside?  | `false` |
 
+For better AppGallery compatibility the AppID can be set to the store:
+```kotlin
+store = Store.APP_GALLERY.setAppId("numeric_app_id_from_huawei")
+```
+
 Listeners are also located in the config:
 
 | Field  | Type | Description | Default value |

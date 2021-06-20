@@ -62,7 +62,10 @@ internal class RateDisplayer {
     private val scope = MainScope()
 
     init {
-        SmartRate.plusRateComponent().inject(this)
+        if (SmartRate.instance == null) {
+            throw IllegalStateException("Not initialized")
+        }
+        SmartRate.instance!!.plusRateComponent().inject(this)
 
         incrementSessionCount()
     }
