@@ -22,7 +22,7 @@ internal class IncrementFakeSessionCountImpl(
                 .let(settingsRepository::setFakeSessionCount)
 
             @Suppress("DEPRECATION")
-            SmartRate.testIncrementSessionCount()
+            SmartRate.instance?.testIncrementSessionCount()
         }
     }
 }

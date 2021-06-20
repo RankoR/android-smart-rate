@@ -32,7 +32,7 @@ internal class RateDialogFragment : BaseBottomDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        SmartRate.plusRateComponent().inject(this)
+        SmartRate.instance?.plusRateComponent()?.inject(this)
     }
 
     override fun onCreateView(

@@ -157,7 +157,7 @@ class MainViewModel : BaseViewModel() {
         viewModelScope.launch {
             clearFakeSessionCount.exec()
             updateFakeSessionCount()
-            SmartRate.clearAll {
+            SmartRate.instance?.clearAll {
                 showCountersCleared.postValue(Unit)
             }
         }

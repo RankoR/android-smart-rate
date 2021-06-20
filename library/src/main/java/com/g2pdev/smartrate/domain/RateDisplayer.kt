@@ -32,9 +32,6 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 internal class RateDisplayer {
-    // Ignoring disposables is OK here, because it could be interrupted only if app dies,
-    // and in this case we have nothing to do with it
-
     @Inject
     lateinit var incrementSessionCount: IncrementSessionCount
 
@@ -62,10 +59,9 @@ internal class RateDisplayer {
     private val scope = MainScope()
 
     init {
-        if (SmartRate.instance == null) {
-            throw IllegalStateException("Not initialized")
-        }
-        SmartRate.instance!!.plusRateComponent().inject(this)
+        requireNotNull(SmartRate.instance) { "Not initialized" }
+
+        SmartRate.instance?.plusRateComponent()?.inject(this)
 
         incrementSessionCount()
     }

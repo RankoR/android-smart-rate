@@ -46,6 +46,8 @@ implementation 'com.g2pdev:smartrate:(insert latest version)'
 
 ## Set up
 
+Please note that upgrade from 1.x to 2.x will reset all library preferences.
+
 ### Initialize the library
 
 In your `Application.onCreate()` method call:
