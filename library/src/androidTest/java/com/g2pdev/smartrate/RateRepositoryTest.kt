@@ -1,7 +1,7 @@
 package com.g2pdev.smartrate
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.g2pdev.smartrate.repository.RateRepository
+import com.g2pdev.smartrate.data.repository.RateRepository
 import javax.inject.Inject
 import org.junit.Assert
 import org.junit.Before

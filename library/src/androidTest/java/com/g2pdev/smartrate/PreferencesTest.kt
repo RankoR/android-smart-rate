@@ -1,8 +1,8 @@
 package com.g2pdev.smartrate
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.g2pdev.smartrate.cache.IsRatedPreference
-import com.g2pdev.smartrate.cache.LastPromptSessionPreference
+import com.g2pdev.smartrate.data.preference.IsRatedPreference
+import com.g2pdev.smartrate.data.preference.LastPromptSessionPreference
 import javax.inject.Inject
 import org.junit.Assert
 import org.junit.Before

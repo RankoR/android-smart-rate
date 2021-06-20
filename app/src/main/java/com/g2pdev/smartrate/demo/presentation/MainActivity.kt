@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.lifecycleScope
 import com.g2pdev.smartrate.SmartRate
+import com.g2pdev.smartrate.data.model.config.SmartRateConfig
 import com.g2pdev.smartrate.demo.R
 import com.g2pdev.smartrate.demo.databinding.ActivityMainBinding
 import com.g2pdev.smartrate.extension.textChanges
-import com.g2pdev.smartrate.logic.model.config.SmartRateConfig
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter

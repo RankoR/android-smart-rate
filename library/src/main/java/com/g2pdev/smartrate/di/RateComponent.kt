@@ -1,7 +1,7 @@
 package com.g2pdev.smartrate.di
 
-import com.g2pdev.smartrate.logic.RateDisplayer
-import com.g2pdev.smartrate.ui.rate.RateDialogFragment
+import com.g2pdev.smartrate.domain.RateDisplayer
+import com.g2pdev.smartrate.presentation.rate.RateDialogFragment
 import dagger.Component
 import javax.inject.Singleton
 
