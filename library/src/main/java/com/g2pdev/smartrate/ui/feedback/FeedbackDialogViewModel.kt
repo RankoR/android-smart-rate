@@ -16,5 +16,4 @@ class FeedbackDialogViewModel : BaseViewModel() {
     private companion object {
         private const val DEFAULT_MIN_FEEDBACK_LENGTH = 16
     }
-
 }

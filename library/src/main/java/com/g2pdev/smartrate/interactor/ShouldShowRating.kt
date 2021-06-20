@@ -32,7 +32,6 @@ internal class ShouldShowRatingImpl(
         }
     }
 
-
     private fun getSessionCountBetweenLastPrompt(): Int {
         return getSessionCount.exec() - getLastPromptSession.exec()
     }

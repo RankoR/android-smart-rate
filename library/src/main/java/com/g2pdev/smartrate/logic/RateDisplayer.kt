@@ -20,13 +20,13 @@ import com.g2pdev.smartrate.logic.model.config.getFeedbackConfig
 import com.g2pdev.smartrate.logic.model.config.getRateConfig
 import com.g2pdev.smartrate.ui.feedback.FeedbackDialogFragment
 import com.g2pdev.smartrate.ui.rate.RateDialogFragment
+import java.lang.ref.WeakReference
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.lang.ref.WeakReference
-import javax.inject.Inject
 
 internal class RateDisplayer {
     // Ignoring disposables is OK here, because it could be interrupted only if app dies,

@@ -12,9 +12,9 @@ import com.g2pdev.smartrate.extension.getColorCompat
 import com.g2pdev.smartrate.interactor.GetAppIcon
 import com.g2pdev.smartrate.logic.model.config.RateConfig
 import com.g2pdev.smartrate.ui.base.BaseBottomDialogFragment
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 internal class RateDialogFragment : BaseBottomDialogFragment() {
 

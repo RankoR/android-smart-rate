@@ -111,7 +111,6 @@ internal class FeedbackDialogFragment : BaseBottomDialogFragment() {
         }
     }
 
-
     private fun getFeedbackText(): String = binding?.feedbackEt?.text.toString().trim()
 
     override fun onSaveInstanceState(outState: Bundle) {
