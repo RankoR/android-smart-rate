@@ -5,10 +5,14 @@ import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.interactor.session_count.GetSessionCount
 import com.g2pdev.smartrate.interactor.session_count.IncrementSessionCount
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 internal class SessionCountInteractorTest : BaseTest() {
 
@@ -20,30 +24,18 @@ internal class SessionCountInteractorTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testSessionCount() {
-        getSessionCount
-            .exec()
-            .test()
-            .assertValue(0)
+        Assert.assertEquals(0, getSessionCount.exec())
 
-        incrementSessionCount
-            .exec()
-            .test()
-            .assertComplete()
+        runBlocking {
+            incrementSessionCount.exec()
+            incrementSessionCount.exec()
+        }
 
-        incrementSessionCount
-            .exec()
-            .test()
-            .assertComplete()
-
-        getSessionCount
-            .exec()
-            .test()
-            .assertValue(2)
+        Assert.assertEquals(2, getSessionCount.exec())
     }
 }

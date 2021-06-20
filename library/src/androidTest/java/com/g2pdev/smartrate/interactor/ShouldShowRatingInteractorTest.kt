@@ -2,20 +2,24 @@ package com.g2pdev.smartrate.interactor
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.BaseTest
-import com.g2pdev.smartrate.cache.SessionCountCache
+import com.g2pdev.smartrate.cache.SessionCountPreference
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
 import com.g2pdev.smartrate.interactor.last_prompt.SetLastPromptSessionToCurrent
 import com.g2pdev.smartrate.interactor.never_ask.SetNeverAsk
-import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 internal class ShouldShowRatingInteractorTest : BaseTest() {
 
     @Inject
-    lateinit var sessionCountCache: SessionCountCache
+    lateinit var sessionCountPreference: SessionCountPreference
 
     @Inject
     lateinit var setIsRated: SetIsRated
@@ -31,123 +35,98 @@ internal class ShouldShowRatingInteractorTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testSessionCountNotReached() {
-        shouldShowRating
-            .exec(
+        runBlocking {
+            val result = shouldShowRating.exec(
                 minSessionCount = 10,
                 minSessionCountBetweenPrompts = 3
             )
-            .test()
-            .assertValue(false)
+
+            Assert.assertFalse(result)
+        }
     }
 
     @Test
     fun testSessionCountReached() {
-        sessionCountCache
-            .put(10)
-            .test()
-            .assertComplete()
+        sessionCountPreference.put(10)
 
-        shouldShowRating
-            .exec(
+        runBlocking {
+            val result = shouldShowRating.exec(
                 minSessionCount = 10,
                 minSessionCountBetweenPrompts = 3
             )
-            .test()
-            .assertValue(true)
+
+            Assert.assertTrue(result)
+        }
     }
 
     @Test
     fun testMinSessionCountBetweenPromptsNotReached() {
-        sessionCountCache
-            .put(10)
-            .test()
-            .assertComplete()
+        sessionCountPreference.put(10)
 
-        setLastPromptSessionToCurrent
-            .exec()
-            .test()
-            .assertComplete()
+        runBlocking {
+            setLastPromptSessionToCurrent.exec()
 
-        shouldShowRating
-            .exec(
+            val result = shouldShowRating.exec(
                 minSessionCount = 10,
                 minSessionCountBetweenPrompts = 3
             )
-            .test()
-            .assertValue(false)
+
+            Assert.assertFalse(result)
+        }
     }
 
     @Test
     fun testMinSessionCountBetweenPromptsReached() {
-        sessionCountCache
-            .put(10)
-            .test()
-            .assertComplete()
+        sessionCountPreference.put(10)
 
-        setLastPromptSessionToCurrent
-            .exec()
-            .test()
-            .assertComplete()
+        runBlocking {
+            setLastPromptSessionToCurrent.exec()
 
-        sessionCountCache
-            .put(13)
-            .test()
-            .assertComplete()
+            sessionCountPreference.put(13)
 
-        shouldShowRating
-            .exec(
+            val result = shouldShowRating.exec(
                 minSessionCount = 10,
                 minSessionCountBetweenPrompts = 3
             )
-            .test()
-            .assertValue(true)
+
+            Assert.assertTrue(result)
+        }
     }
 
     @Test
     fun testNeverAsk() {
-        sessionCountCache
-            .put(100)
-            .test()
-            .assertComplete()
+        sessionCountPreference.put(100)
 
-        setNeverAsk
-            .exec(true)
-            .test()
-            .assertComplete()
+        runBlocking {
+            setNeverAsk.exec(true)
 
-        shouldShowRating
-            .exec(
+            val result = shouldShowRating.exec(
                 minSessionCount = 10,
                 minSessionCountBetweenPrompts = 3
             )
-            .test()
-            .assertValue(false)
+
+            Assert.assertFalse(result)
+        }
     }
 
     @Test
     fun testIsRated() {
-        sessionCountCache
-            .put(100)
-            .test()
-            .assertComplete()
+        sessionCountPreference.put(100)
 
-        setIsRated
-            .exec(true)
-            .test()
-            .assertComplete()
+        runBlocking {
+            setIsRated.exec(true)
 
-        shouldShowRating
-            .exec(
+            val result = shouldShowRating.exec(
                 minSessionCount = 10,
                 minSessionCountBetweenPrompts = 3
             )
-            .test()
-            .assertValue(false)
+
+            Assert.assertFalse(result)
+        }
     }
 }

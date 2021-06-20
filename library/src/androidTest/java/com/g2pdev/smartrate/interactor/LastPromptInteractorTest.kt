@@ -2,14 +2,18 @@ package com.g2pdev.smartrate.interactor
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.BaseTest
-import com.g2pdev.smartrate.cache.SessionCountCache
+import com.g2pdev.smartrate.cache.SessionCountPreference
 import com.g2pdev.smartrate.interactor.last_prompt.GetLastPromptSession
 import com.g2pdev.smartrate.interactor.last_prompt.SetLastPromptSessionToCurrent
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 internal class LastPromptInteractorTest : BaseTest() {
 
@@ -20,34 +24,23 @@ internal class LastPromptInteractorTest : BaseTest() {
     lateinit var setLastPromptSessionToCurrent: SetLastPromptSessionToCurrent
 
     @Inject
-    lateinit var sessionCountCache: SessionCountCache
+    lateinit var sessionCountPreference: SessionCountPreference
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testLastPromptInteractorTest() {
-        getLastPromptSession
-            .exec()
-            .test()
-            .assertValue(0)
+        Assert.assertEquals(0, getLastPromptSession.exec())
 
-        sessionCountCache
-            .put(10)
-            .test()
-            .assertComplete()
+        sessionCountPreference.put(10)
 
-        setLastPromptSessionToCurrent
-            .exec()
-            .test()
-            .assertComplete()
+        runBlocking {
+            setLastPromptSessionToCurrent.exec()
 
-        getLastPromptSession
-            .exec()
-            .test()
-            .assertValue(10)
+            Assert.assertEquals(10, getLastPromptSession.exec())
+        }
     }
 }

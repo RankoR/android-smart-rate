@@ -3,6 +3,7 @@ package com.g2pdev.smartrate.interactor
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.g2pdev.smartrate.BaseTest
 import javax.inject.Inject
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,19 +16,15 @@ internal class GetPackageNameInteractorTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testGetPackageName() {
-        getPackageName
-            .exec()
-            .test()
-            .assertValue(packageName)
+        Assert.assertEquals(PACKAGE_NAME, getPackageName.exec())
     }
 
     private companion object {
-        private const val packageName = "com.g2pdev.smartrate.test"
+        private const val PACKAGE_NAME = "com.g2pdev.smartrate.test"
     }
 }

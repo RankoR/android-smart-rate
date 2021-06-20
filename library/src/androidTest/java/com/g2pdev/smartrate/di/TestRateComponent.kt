@@ -1,6 +1,6 @@
 package com.g2pdev.smartrate.di
 
-import com.g2pdev.smartrate.CachesTest
+import com.g2pdev.smartrate.PreferencesTest
 import com.g2pdev.smartrate.RateRepositoryTest
 import com.g2pdev.smartrate.interactor.ClearAllInteractorTest
 import com.g2pdev.smartrate.interactor.GetPackageNameInteractorTest
@@ -21,7 +21,7 @@ import javax.inject.Singleton
 @Singleton
 internal interface TestRateComponent {
 
-    fun inject(cachesTest: CachesTest)
+    fun inject(preferencesTest: PreferencesTest)
     fun inject(rateRepositoryTest: RateRepositoryTest)
 
     fun inject(isRatedInteractorTest: IsRatedInteractorTest)

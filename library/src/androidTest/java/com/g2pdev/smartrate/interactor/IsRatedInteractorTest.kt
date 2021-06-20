@@ -5,10 +5,14 @@ import com.g2pdev.smartrate.BaseTest
 import com.g2pdev.smartrate.interactor.is_rated.IsRated
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 internal class IsRatedInteractorTest : BaseTest() {
 
@@ -20,25 +24,17 @@ internal class IsRatedInteractorTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testIsRated() {
-        isRated
-            .exec()
-            .test()
-            .assertValue(false)
+        Assert.assertFalse(isRated.exec())
 
-        setIsRated
-            .exec(true)
-            .test()
-            .assertComplete()
+        runBlocking {
+            setIsRated.exec(true)
+        }
 
-        isRated
-            .exec()
-            .test()
-            .assertValue(true)
+        Assert.assertTrue(isRated.exec())
     }
 }

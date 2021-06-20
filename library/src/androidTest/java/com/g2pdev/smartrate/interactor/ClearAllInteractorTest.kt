@@ -11,10 +11,14 @@ import com.g2pdev.smartrate.interactor.never_ask.SetNeverAsk
 import com.g2pdev.smartrate.interactor.session_count.GetSessionCount
 import com.g2pdev.smartrate.interactor.session_count.IncrementSessionCount
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 internal class ClearAllInteractorTest : BaseTest() {
 
@@ -47,65 +51,26 @@ internal class ClearAllInteractorTest : BaseTest() {
 
     @Before
     fun setUp() {
-        createDaggerComponent()
-            .inject(this)
+        createDaggerComponent().inject(this)
     }
 
     @Test
     fun testClearAll() {
-        incrementSessionCount
-            .exec()
-            .test()
-            .assertComplete()
+        runBlocking {
+            incrementSessionCount.exec()
+            incrementSessionCount.exec()
+            incrementSessionCount.exec()
 
-        incrementSessionCount
-            .exec()
-            .test()
-            .assertComplete()
+            setIsRated.exec(true)
+            setNeverAsk.exec(true)
+            setLastPromptSessionToCurrent.exec()
 
-        incrementSessionCount
-            .exec()
-            .test()
-            .assertComplete()
+            clearAll.exec()
 
-        setIsRated
-            .exec(true)
-            .test()
-            .assertComplete()
-
-        setNeverAsk
-            .exec(true)
-            .test()
-            .assertComplete()
-
-        setLastPromptSessionToCurrent
-            .exec()
-            .test()
-            .assertComplete()
-
-        clearAll
-            .exec()
-            .test()
-            .assertComplete()
-
-        getSessionCount
-            .exec()
-            .test()
-            .assertValue(0)
-
-        isRated
-            .exec()
-            .test()
-            .assertValue(false)
-
-        isNeverAsk
-            .exec()
-            .test()
-            .assertValue(false)
-
-        getLastPromptSession
-            .exec()
-            .test()
-            .assertValue(0)
+            Assert.assertEquals(0, getSessionCount.exec())
+            Assert.assertFalse(isRated.exec())
+            Assert.assertFalse(isNeverAsk.exec())
+            Assert.assertEquals(0, getLastPromptSession.exec())
+        }
     }
 }
