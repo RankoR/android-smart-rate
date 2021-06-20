@@ -7,132 +7,92 @@
     android:paddingStart="32dp"
     android:paddingTop="32dp"
     android:paddingEnd="32dp"
-    android:background="@color/background"
-    tools:context=".ui.MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sessionCountTil"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sessionCountTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_session_count"
-                app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_session_count"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sessionCountEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                android:id="@+id/sessionCountEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sessionCountBetweenPromptsTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/hint_session_count_between_prompts"
-                app:layout_constraintTop_toBottomOf="@id/sessionCountTil">
+            android:id="@+id/sessionCountBetweenPromptsTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/hint_session_count_between_prompts"
+            app:layout_constraintTop_toBottomOf="@id/sessionCountTil">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sessionCountBetweenPromptsEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
+                android:id="@+id/sessionCountBetweenPromptsEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-                android:id="@+id/fakeSessionCountTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/sessionCountBetweenPromptsTil"
-                tools:text="Session count: 10" />
+            android:id="@+id/fakeSessionCountTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/sessionCountBetweenPromptsTil"
+            tools:text="Session count: 10" />
 
         <com.google.android.material.button.MaterialButton
-                android:id="@+id/incrementFakeSessionCountBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/title_btn_increment_fake_session_count"
-                app:layout_constraintTop_toBottomOf="@id/fakeSessionCountTv" />
+            android:id="@+id/incrementFakeSessionCountBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/title_btn_increment_fake_session_count"
+            app:layout_constraintTop_toBottomOf="@id/fakeSessionCountTv" />
 
         <com.google.android.material.button.MaterialButton
-                android:id="@+id/showRateDialogBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/title_btn_show_dialog"
-                app:layout_constraintTop_toBottomOf="@id/incrementFakeSessionCountBtn" />
+            android:id="@+id/showRateDialogBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/title_btn_show_dialog"
+            app:layout_constraintTop_toBottomOf="@id/incrementFakeSessionCountBtn" />
 
         <TextView
-                android:text="@string/select_language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:textColor="@color/feedbackTitleText"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintBaseline_toBaselineOf="@+id/localeSelect"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/localeSelect"
-                android:layout_marginEnd="4dp"
-                style="?android:attr/spinnerItemStyle"
-                app:layout_constraintVertical_bias="0.5" />
-
-        <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/localeSelect"
-                app:flow_horizontalAlign="center"
-                app:layout_constraintTop_toBottomOf="@id/showRateDialogBtn"
-                android:layout_marginTop="8dp"
-                android:layout_width="wrap_content"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                android:entries="@array/locales_user_facing"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-                android:text="@string/toggle_dark_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/darkModeSwitch"
-                app:layout_constraintTop_toBottomOf="@id/localeSelect"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-                android:id="@+id/showRateDialogDescriptionTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/description_show_dialog"
-                app:layout_constraintTop_toBottomOf="@id/darkModeSwitch" />
+            android:id="@+id/showRateDialogDescriptionTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/description_show_dialog"
+            app:layout_constraintTop_toBottomOf="@id/showRateDialogBtn" />
 
         <com.google.android.material.button.MaterialButton
-                android:id="@+id/resetLibraryCountersBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/title_btn_reset_library_counters"
-                app:layout_constraintTop_toBottomOf="@id/showRateDialogDescriptionTv" />
+            android:id="@+id/resetLibraryCountersBtn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/title_btn_reset_library_counters"
+            app:layout_constraintTop_toBottomOf="@id/showRateDialogDescriptionTv" />
 
         <TextView
-                android:id="@+id/logsTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/resetLibraryCountersBtn" />
+            android:id="@+id/logsTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/resetLibraryCountersBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

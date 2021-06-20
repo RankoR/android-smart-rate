@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sr_title">Bizimle olan deneyiminiz nasıldı?</string>
+    <string name="sr_never_ask">Asla sorma</string>
+    <string name="sr_maybe_later">Belki sonra</string>
+    <string name="sr_title_feedback">geri bildirim</string>
+    <string name="sr_hint_feedback">Bize neyin yanlış gittiğini önerin ve üzerinde çalışalım</string>
+    <string name="sr_feedback_cancel">İptal etmek</string>
+    <string name="sr_feedback_submit">Sunmak</string>
+</resources>

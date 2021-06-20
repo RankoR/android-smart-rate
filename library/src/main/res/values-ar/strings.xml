@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sr_title">كيف كانت تجربتك معنا؟</string>
+    <string name="sr_never_ask">لم نطلب</string>
+    <string name="sr_maybe_later">ربما في وقت لاحق</string>
+    <string name="sr_title_feedback">تعليق</string>
+    <string name="sr_hint_feedback">اقترح علينا الأخطاء التي حدثت وسنعمل على حلها</string>
+    <string name="sr_feedback_cancel">يلغي</string>
+    <string name="sr_feedback_submit">إرسال</string>
+</resources>
