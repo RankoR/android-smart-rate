@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1] 2021-06-20
+
+- Migrate to Coroutines, MVVM
+- Add Google Play In-App Review API
+- Add Arabic and Turkish translations (automated)
+- Remove some staff (dark mode switch & locale) from demo app
+- Moved to mavenCentral
+
 ## [1.0.3] 2020-08-27
 
 - Rollback Kotlin version
