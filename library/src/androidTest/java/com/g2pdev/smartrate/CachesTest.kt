@@ -1,8 +1,7 @@
 package com.g2pdev.smartrate
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.g2pdev.smartrate.cache.BaseCache
-import com.g2pdev.smartrate.cache.IsRatedCache
+import com.g2pdev.smartrate.cache.IsRatedPreference
 import com.g2pdev.smartrate.cache.LastPromptSessionCache
 import javax.inject.Inject
 import org.junit.Before
@@ -16,7 +15,7 @@ import org.junit.runner.RunWith
 internal class CachesTest : BaseTest() {
 
     @Inject
-    lateinit var isRatedCache: IsRatedCache
+    lateinit var isRatedPreference: IsRatedPreference
 
     @Inject
     lateinit var lastPromptSessionCache: LastPromptSessionCache
@@ -29,22 +28,22 @@ internal class CachesTest : BaseTest() {
 
     @Test
     fun testIsRatedCache() {
-        isRatedCache
+        isRatedPreference
             .get()
             .test()
             .assertError(BaseCache.NoValueException::class.java)
 
-        isRatedCache
+        isRatedPreference
             .get(defaultValue = false)
             .test()
             .assertValue(false)
 
-        isRatedCache
+        isRatedPreference
             .put(true)
             .test()
             .assertComplete()
 
-        isRatedCache
+        isRatedPreference
             .get()
             .test()
             .assertValue(true)

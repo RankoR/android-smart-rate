@@ -1,10 +1,11 @@
 package com.g2pdev.smartrate.interactor.session_count
 
 import com.g2pdev.smartrate.repository.RateRepository
-import io.reactivex.Completable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 internal interface IncrementSessionCount {
-    fun exec(): Completable
+    suspend fun exec()
 }
 
 internal class IncrementSessionCountImpl(
@@ -12,10 +13,12 @@ internal class IncrementSessionCountImpl(
     private val getSessionCount: GetSessionCount
 ) : IncrementSessionCount {
 
-    override fun exec(): Completable {
-        return getSessionCount
-            .exec()
-            .map { it + 1 }
-            .flatMapCompletable(rateRepository::setSessionCount)
+    override suspend fun exec() {
+        withContext(Dispatchers.IO) {
+            getSessionCount
+                .exec()
+                .let { it + 1 }
+                .let(rateRepository::setSessionCount)
+        }
     }
 }

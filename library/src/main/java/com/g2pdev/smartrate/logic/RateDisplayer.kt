@@ -6,8 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.FragmentActivity
 import com.g2pdev.smartrate.SmartRate
-import com.g2pdev.smartrate.extension.schedulersIoToMain
-import com.g2pdev.smartrate.extension.schedulersSingleToMain
 import com.g2pdev.smartrate.interactor.ClearAll
 import com.g2pdev.smartrate.interactor.GetPackageName
 import com.g2pdev.smartrate.interactor.ShouldShowRating
@@ -22,10 +20,13 @@ import com.g2pdev.smartrate.logic.model.config.getFeedbackConfig
 import com.g2pdev.smartrate.logic.model.config.getRateConfig
 import com.g2pdev.smartrate.ui.feedback.FeedbackDialogFragment
 import com.g2pdev.smartrate.ui.rate.RateDialogFragment
-import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.lang.ref.WeakReference
 import javax.inject.Inject
-import timber.log.Timber
 
 internal class RateDisplayer {
     // Ignoring disposables is OK here, because it could be interrupted only if app dies,
@@ -55,6 +56,8 @@ internal class RateDisplayer {
     @Inject
     lateinit var clearAll: ClearAll
 
+    private val scope = MainScope()
+
     init {
         SmartRate.plusRateComponent().inject(this)
 
@@ -65,47 +68,36 @@ internal class RateDisplayer {
     fun incrementSessionCount(test: Boolean = false) {
         if (test) {
             // Crash if package name is not Demo
-            getPackageName
-                .exec()
-                .map { it != demoAppPackageName }
-                .schedulersIoToMain()
-                .subscribe({ shouldCrash ->
-                    if (shouldCrash) {
-                        throw IllegalAccessError("Do not call test methods in real apps!")
-                    }
-                }, Timber::e)
+            if (getPackageName.exec() != DEMO_APP_PACKAGE_NAME) {
+                throw IllegalAccessError("Do not call test methods in real apps!")
+            }
         }
 
-        incrementSessionCount
-            .exec()
-            .schedulersSingleToMain()
-            .subscribe({}, Timber::e)
+        scope.launch {
+            incrementSessionCount.exec()
+        }
     }
 
-    @SuppressLint("CheckResult")
     fun clearAll(callback: (() -> Unit)? = null) {
-        clearAll
-            .exec()
-            .schedulersSingleToMain()
-            .subscribe({
+        scope.launch {
+            clearAll.exec()
+
+            withContext(Dispatchers.Main) {
                 callback?.invoke()
-            }, Timber::e)
+            }
+        }
     }
 
-    @SuppressLint("CheckResult")
     fun show(activity: FragmentActivity, config: SmartRateConfig) {
-        shouldShowRating
-            .exec(config.minSessionCount, config.minSessionCountBetweenPrompts)
-            .schedulersSingleToMain()
-            .subscribe({ shouldShow ->
-                Timber.d("Should show rate dialog: $shouldShow")
+        scope.launch {
+            val shouldShow = shouldShowRating.exec(config.minSessionCount, config.minSessionCountBetweenPrompts)
 
-                if (shouldShow) {
-                    showRateDialog(activity, config)
-                } else {
-                    config.onRateDialogWillNotShowListener?.invoke()
-                }
-            }, Timber::e)
+            if (shouldShow) {
+                showRateDialog(activity, config)
+            } else {
+                config.onRateDialogWillNotShowListener?.invoke()
+            }
+        }
     }
 
     private fun showRateDialog(activity: FragmentActivity, config: SmartRateConfig) {
@@ -185,63 +177,47 @@ internal class RateDisplayer {
             .show(activity)
     }
 
-    @SuppressLint("CheckResult")
     private fun setLastPromptSessionToCurrent() {
-        setLastPromptSessionToCurrent
-            .exec()
-            .schedulersSingleToMain()
-            .subscribe({
-                Timber.d("Set last prompt session to current")
-            }, Timber::e)
+        scope.launch {
+            setLastPromptSessionToCurrent.exec()
+        }
     }
 
-    @SuppressLint("CheckResult")
     private fun setNeverAsk() {
-        setNeverAsk
-            .exec(true)
-            .schedulersSingleToMain()
-            .subscribe({
-                Timber.d("Set never ask to true")
-            }, Timber::e)
+        scope.launch {
+            setNeverAsk.exec(true)
+        }
     }
 
-    @SuppressLint("CheckResult")
     private fun setIsRated() {
-        setIsRated
-            .exec(true)
-            .schedulersSingleToMain()
-            .subscribe({
-                Timber.d("Set is rated to true")
-            }, Timber::e)
+        scope.launch {
+            setIsRated.exec(true)
+        }
     }
 
-    @SuppressLint("CheckResult")
     private fun openStoreLink(context: Context, config: SmartRateConfig) {
-        getStoreIntent(context, config)
-            .schedulersSingleToMain()
-            .subscribe({ intent ->
-                try {
-                    context.startActivity(intent)
-                } catch (e: Exception) {
-                    Timber.e(e)
-                }
-            }, Timber::e)
+        try {
+            getStoreIntent(context, config).let(context::startActivity)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 
-    private fun getStoreIntent(context: Context, config: SmartRateConfig): Single<Intent> {
+    private fun getStoreIntent(context: Context, config: SmartRateConfig): Intent {
         return config.customStoreLink?.let { link ->
-            Single.just(createIntentForLink(link))
+            createIntentForLink(link)
         } ?: getPackageName
             .exec()
-            .flatMap { getStoreLink.exec(config.store, it) }
-            .map { getIntentForLink(context, it) }
+            .let { getStoreLink.exec(config.store, it) }
+            .let { getIntentForLink(context, it) }
     }
 
     private fun getIntentForLink(context: Context, storeLink: StoreLink): Intent {
         return createIntentForLink(storeLink.link)
             .takeIf {
                 context.canLaunch(it)
-            } ?: createIntentForLink(storeLink.alternateLink)
+            }
+            ?: createIntentForLink(storeLink.alternateLink)
     }
 
     private fun createIntentForLink(link: String): Intent {
@@ -253,6 +229,6 @@ internal class RateDisplayer {
     }
 
     private companion object {
-        private const val demoAppPackageName = "com.g2pdev.smartrate.demo"
+        private const val DEMO_APP_PACKAGE_NAME = "com.g2pdev.smartrate.demo"
     }
 }

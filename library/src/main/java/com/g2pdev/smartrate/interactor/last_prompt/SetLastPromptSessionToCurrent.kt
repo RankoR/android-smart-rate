@@ -2,10 +2,11 @@ package com.g2pdev.smartrate.interactor.last_prompt
 
 import com.g2pdev.smartrate.interactor.session_count.GetSessionCount
 import com.g2pdev.smartrate.repository.RateRepository
-import io.reactivex.Completable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 internal interface SetLastPromptSessionToCurrent {
-    fun exec(): Completable
+    suspend fun exec()
 }
 
 internal class SetLastPromptSessionToCurrentImpl(
@@ -13,9 +14,11 @@ internal class SetLastPromptSessionToCurrentImpl(
     private val getSessionCount: GetSessionCount
 ) : SetLastPromptSessionToCurrent {
 
-    override fun exec(): Completable {
-        return getSessionCount
-            .exec()
-            .flatMapCompletable(rateRepository::setLastPromptSession)
+    override suspend fun exec() {
+        withContext(Dispatchers.IO) {
+            getSessionCount
+                .exec()
+                .let(rateRepository::setLastPromptSession)
+        }
     }
 }

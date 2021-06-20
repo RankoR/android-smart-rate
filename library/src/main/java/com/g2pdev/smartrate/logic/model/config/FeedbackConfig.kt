@@ -3,7 +3,7 @@ package com.g2pdev.smartrate.logic.model.config
 import android.os.Parcelable
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 internal data class FeedbackConfig(

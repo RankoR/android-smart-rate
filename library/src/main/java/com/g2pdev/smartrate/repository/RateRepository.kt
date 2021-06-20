@@ -1,80 +1,76 @@
 package com.g2pdev.smartrate.repository
 
-import com.g2pdev.smartrate.cache.IsRatedCache
-import com.g2pdev.smartrate.cache.LastPromptSessionCache
-import com.g2pdev.smartrate.cache.NeverAskCache
-import com.g2pdev.smartrate.cache.SessionCountCache
-import io.reactivex.Completable
-import io.reactivex.Single
+import com.g2pdev.smartrate.cache.IsRatedPreference
+import com.g2pdev.smartrate.cache.LastPromptSessionPreference
+import com.g2pdev.smartrate.cache.NeverAskPreference
+import com.g2pdev.smartrate.cache.SessionCountPreference
 
 internal interface RateRepository {
-    fun getSessionCount(): Single<Int>
-    fun setSessionCount(sessionCount: Int): Completable
+    fun getSessionCount(): Int
+    fun setSessionCount(sessionCount: Int)
 
-    fun isRated(): Single<Boolean>
-    fun setIsRated(isRated: Boolean): Completable
+    fun isRated(): Boolean
+    fun setIsRated(isRated: Boolean)
 
-    fun isNeverAsk(): Single<Boolean>
-    fun setNeverAsk(neverAsk: Boolean): Completable
+    fun isNeverAsk(): Boolean
+    fun setNeverAsk(neverAsk: Boolean)
 
-    fun getLastPromptSession(): Single<Int>
-    fun setLastPromptSession(session: Int): Completable
+    fun getLastPromptSession(): Int
+    fun setLastPromptSession(session: Int)
 
-    fun clearAll(): Completable
+    fun clearAll()
 }
 
 internal class RateRepositoryImpl(
-    private val sessionCountCache: SessionCountCache,
-    private val isRatedCache: IsRatedCache,
-    private val neverAskCache: NeverAskCache,
-    private val lastPromptSessionCache: LastPromptSessionCache
+    private val sessionCountPreference: SessionCountPreference,
+    private val isRatedPreference: IsRatedPreference,
+    private val neverAskPreference: NeverAskPreference,
+    private val lastPromptSessionPreference: LastPromptSessionPreference
 ) : RateRepository {
 
-    override fun getSessionCount(): Single<Int> {
-        return sessionCountCache.get(defaultSessionCount)
+    override fun getSessionCount(): Int {
+        return sessionCountPreference.get() ?: DEFAULT_SESSION_COUNT
     }
 
-    override fun setSessionCount(sessionCount: Int): Completable {
-        return sessionCountCache.put(sessionCount)
+    override fun setSessionCount(sessionCount: Int) {
+        sessionCountPreference.put(sessionCount)
     }
 
-    override fun isRated(): Single<Boolean> {
-        return isRatedCache.get(defaultIsRated)
+    override fun isRated(): Boolean {
+        return isRatedPreference.get() ?: DEFAULT_IS_RATED
     }
 
-    override fun setIsRated(isRated: Boolean): Completable {
-        return isRatedCache.put(isRated)
+    override fun setIsRated(isRated: Boolean) {
+        isRatedPreference.put(isRated)
     }
 
-    override fun isNeverAsk(): Single<Boolean> {
-        return neverAskCache.get(defaultNeverAsk)
+    override fun isNeverAsk(): Boolean {
+        return neverAskPreference.get() ?: DEFAULT_NEVER_ASK
     }
 
-    override fun setNeverAsk(neverAsk: Boolean): Completable {
-        return neverAskCache.put(neverAsk)
+    override fun setNeverAsk(neverAsk: Boolean) {
+        neverAskPreference.put(neverAsk)
     }
 
-    override fun getLastPromptSession(): Single<Int> {
-        return lastPromptSessionCache.get(defaultLastAskSession)
+    override fun getLastPromptSession(): Int {
+        return lastPromptSessionPreference.get() ?: DEFAULT_LAST_ASK_SESSION
     }
 
-    override fun setLastPromptSession(session: Int): Completable {
-        return lastPromptSessionCache.put(session)
+    override fun setLastPromptSession(session: Int) {
+        lastPromptSessionPreference.put(session)
     }
 
-    override fun clearAll(): Completable {
-        return Completable.fromCallable {
-            sessionCountCache.resetSync()
-            isRatedCache.resetSync()
-            neverAskCache.resetSync()
-            lastPromptSessionCache.resetSync()
-        }
+    override fun clearAll() {
+        sessionCountPreference.delete()
+        isRatedPreference.delete()
+        neverAskPreference.delete()
+        lastPromptSessionPreference.delete()
     }
 
     private companion object {
-        private const val defaultSessionCount = 0
-        private const val defaultIsRated = false
-        private const val defaultNeverAsk = false
-        private const val defaultLastAskSession = 0
+        private const val DEFAULT_SESSION_COUNT = 0
+        private const val DEFAULT_IS_RATED = false
+        private const val DEFAULT_NEVER_ASK = false
+        private const val DEFAULT_LAST_ASK_SESSION = 0
     }
 }

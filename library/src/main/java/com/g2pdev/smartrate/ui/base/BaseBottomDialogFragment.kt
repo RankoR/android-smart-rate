@@ -3,19 +3,14 @@ package com.g2pdev.smartrate.ui.base
 import android.content.DialogInterface
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import com.g2pdev.smartrate.R
-import com.g2pdev.smartrate.extension.schedulersIoToMain
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import io.reactivex.Completable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import java.util.concurrent.TimeUnit
-import moxy.MvpBottomSheetDialogFragment
-import timber.log.Timber
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-internal abstract class BaseBottomDialogFragment : MvpBottomSheetDialogFragment() {
-
-    private val compositeDisposable by lazy { CompositeDisposable() }
+internal abstract class BaseBottomDialogFragment : BottomSheetDialogFragment() {
 
     var onDismissListener: (() -> Unit)? = null
 
@@ -47,29 +42,16 @@ internal abstract class BaseBottomDialogFragment : MvpBottomSheetDialogFragment(
         super.onDismiss(dialog)
     }
 
-    override fun onDestroyView() {
-        compositeDisposable.clear()
-
-        super.onDestroyView()
-    }
-
     fun disableDismiss(duration: Long = 0L, dismissEnabledListener: (() -> Unit)? = null) {
         isCancelable = false
 
         if (duration > 0) {
-            Completable
-                .timer(duration, TimeUnit.MILLISECONDS)
-                .schedulersIoToMain()
-                .subscribe({
-                    isCancelable = true
+            lifecycleScope.launch {
+                delay(duration)
 
-                    dismissEnabledListener?.invoke()
-                }, Timber::e)
-                .disposeOnDestroy()
+                isCancelable = true
+                dismissEnabledListener?.invoke()
+            }
         }
-    }
-
-    protected fun Disposable.disposeOnDestroy() {
-        compositeDisposable.add(this)
     }
 }

@@ -2,18 +2,8 @@ package com.g2pdev.smartrate.di
 
 import android.content.Context
 import android.content.pm.PackageManager
-import com.g2pdev.smartrate.cache.IsRatedCache
-import com.g2pdev.smartrate.cache.LastPromptSessionCache
-import com.g2pdev.smartrate.cache.NeverAskCache
-import com.g2pdev.smartrate.cache.SessionCountCache
-import com.g2pdev.smartrate.interactor.ClearAll
-import com.g2pdev.smartrate.interactor.ClearAllImpl
-import com.g2pdev.smartrate.interactor.GetAppIcon
-import com.g2pdev.smartrate.interactor.GetAppIconImpl
-import com.g2pdev.smartrate.interactor.GetPackageName
-import com.g2pdev.smartrate.interactor.GetPackageNameImpl
-import com.g2pdev.smartrate.interactor.ShouldShowRating
-import com.g2pdev.smartrate.interactor.ShouldShowRatingImpl
+import com.g2pdev.smartrate.cache.*
+import com.g2pdev.smartrate.interactor.*
 import com.g2pdev.smartrate.interactor.is_rated.IsRated
 import com.g2pdev.smartrate.interactor.is_rated.IsRatedImpl
 import com.g2pdev.smartrate.interactor.is_rated.SetIsRated
@@ -36,7 +26,6 @@ import com.g2pdev.smartrate.logic.StoreLinkResolver
 import com.g2pdev.smartrate.logic.StoreLinkResolverImpl
 import com.g2pdev.smartrate.repository.RateRepository
 import com.g2pdev.smartrate.repository.RateRepositoryImpl
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -58,45 +47,36 @@ internal open class RateModule(
 
     @Provides
     @Singleton
-    fun provideGson(): Gson = Gson()
+    fun provideSessionCountPreference(
+        context: Context
+    ): SessionCountPreference = SessionCountPreferenceImpl(context)
 
     @Provides
     @Singleton
-    fun provideSessionCountCache(
-        gson: Gson,
+    fun provideIsRatedPreference(
         context: Context
-    ): SessionCountCache = SessionCountCache(gson, context)
+    ): IsRatedPreference = IsRatedPreferenceImpl(context)
 
     @Provides
     @Singleton
-    fun provideIsRatedCache(
-        gson: Gson,
+    fun provideNeverAskPreference(
         context: Context
-    ): IsRatedCache = IsRatedCache(gson, context)
+    ): NeverAskPreference = NeverAskPreferenceImpl(context)
 
     @Provides
     @Singleton
-    fun provideNeverAskCache(
-        gson: Gson,
+    fun provideLastPromptSessionPreference(
         context: Context
-    ): NeverAskCache = NeverAskCache(gson, context)
-
-    @Provides
-    @Singleton
-    fun provideLastPromptSessionCache(
-        gson: Gson,
-        context: Context
-    ): LastPromptSessionCache = LastPromptSessionCache(gson, context)
+    ): LastPromptSessionPreference = LastPromptSessionPreferenceImpl(context)
 
     @Provides
     @Singleton
     fun provideRateRepository(
-        sessionCountCache: SessionCountCache,
-        isRatedCache: IsRatedCache,
-        neverAskCache: NeverAskCache,
-        lastPromptSessionCache: LastPromptSessionCache
-    ): RateRepository =
-        RateRepositoryImpl(sessionCountCache, isRatedCache, neverAskCache, lastPromptSessionCache)
+        sessionCountPreference: SessionCountPreference,
+        isRatedPreference: IsRatedPreference,
+        neverAskPreference: NeverAskPreference,
+        lastPromptSessionPreference: LastPromptSessionPreference
+    ): RateRepository = RateRepositoryImpl(sessionCountPreference, isRatedPreference, neverAskPreference, lastPromptSessionPreference)
 
     @Provides
     @Singleton
@@ -109,8 +89,7 @@ internal open class RateModule(
     fun provideIncrementSessionCount(
         rateRepository: RateRepository,
         getSessionCount: GetSessionCount
-    ): IncrementSessionCount =
-        IncrementSessionCountImpl(rateRepository, getSessionCount)
+    ): IncrementSessionCount = IncrementSessionCountImpl(rateRepository, getSessionCount)
 
     @Provides
     @Singleton
@@ -135,8 +114,7 @@ internal open class RateModule(
     fun provideSetLastPromptSessionToCurrent(
         rateRepository: RateRepository,
         getSessionCount: GetSessionCount
-    ): SetLastPromptSessionToCurrent =
-        SetLastPromptSessionToCurrentImpl(rateRepository, getSessionCount)
+    ): SetLastPromptSessionToCurrent = SetLastPromptSessionToCurrentImpl(rateRepository, getSessionCount)
 
     @Provides
     @Singleton
@@ -157,8 +135,7 @@ internal open class RateModule(
         isRated: IsRated,
         isNeverAsk: IsNeverAsk,
         getLastPromptSession: GetLastPromptSession
-    ): ShouldShowRating =
-        ShouldShowRatingImpl(getSessionCount, isRated, isNeverAsk, getLastPromptSession)
+    ): ShouldShowRating = ShouldShowRatingImpl(getSessionCount, isRated, isNeverAsk, getLastPromptSession)
 
     @Provides
     @Singleton

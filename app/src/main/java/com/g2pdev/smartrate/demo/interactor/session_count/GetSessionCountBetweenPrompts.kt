@@ -1,17 +1,20 @@
 package com.g2pdev.smartrate.demo.interactor.session_count
 
 import com.g2pdev.smartrate.demo.repository.SettingsRepository
-import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 interface GetSessionCountBetweenPrompts {
-    fun exec(): Single<Int>
+    suspend fun exec(): Int
 }
 
 internal class GetSessionCountBetweenPromptsImpl(
     private val settingsRepository: SettingsRepository
 ) : GetSessionCountBetweenPrompts {
 
-    override fun exec(): Single<Int> {
-        return settingsRepository.getSessionCountBetweenPrompts()
+    override suspend fun exec(): Int {
+        return withContext(Dispatchers.IO) {
+            settingsRepository.getSessionCountBetweenPrompts()
+        }
     }
 }

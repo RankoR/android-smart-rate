@@ -2,10 +2,11 @@ package com.g2pdev.smartrate.demo.interactor.fake_session_count
 
 import com.g2pdev.smartrate.SmartRate
 import com.g2pdev.smartrate.demo.repository.SettingsRepository
-import io.reactivex.Completable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 interface IncrementFakeSessionCount {
-    fun exec(): Completable
+    suspend fun exec()
 }
 
 internal class IncrementFakeSessionCountImpl(
@@ -13,14 +14,15 @@ internal class IncrementFakeSessionCountImpl(
     private val settingsRepository: SettingsRepository
 ) : IncrementFakeSessionCount {
 
-    override fun exec(): Completable {
-        return getFakeSessionCount
-            .exec()
-            .map { it + 1 }
-            .flatMapCompletable(settingsRepository::setFakeSessionCount)
-            .doOnComplete {
-                @Suppress("DEPRECATION")
-                SmartRate.testIncrementSessionCount()
-            }
+    override suspend fun exec() {
+        withContext(Dispatchers.IO) {
+            getFakeSessionCount
+                .exec()
+                .let { it + 1 }
+                .let(settingsRepository::setFakeSessionCount)
+
+            @Suppress("DEPRECATION")
+            SmartRate.testIncrementSessionCount()
+        }
     }
 }
